@@ -156,33 +156,42 @@ var showRecipe = /*#__PURE__*/function () {
 
           case 6:
             data = _context.sent;
-            // to get data from fetch api and store it to the variable
-            console.log(res, data);
 
             if (res.ok) {
-              _context.next = 10;
+              _context.next = 9;
               break;
             }
 
             throw new Error("".concat(data.message, " (").concat(res.status, ")"));
 
-          case 10:
+          case 9:
             recipe = data.data.recipe; // since we have recipe on both side we can just distruct the variable
 
-            _context.next = 16;
+            recipe = {
+              id: recipe.id,
+              title: recipe.title,
+              servings: recipe.servings,
+              sourceUrl: recipe.source_url,
+              publisher: recipe.publisher,
+              ingredients: recipe.ingredients,
+              image: recipe.image_url,
+              cookingTime: recipe.cooking_time
+            };
+            console.log(recipe);
+            _context.next = 17;
             break;
 
-          case 13:
-            _context.prev = 13;
+          case 14:
+            _context.prev = 14;
             _context.t0 = _context["catch"](0);
             alert(_context.t0);
 
-          case 16:
+          case 17:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 13]]);
+    }, _callee, null, [[0, 14]]);
   }));
 
   return function showRecipe() {
