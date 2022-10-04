@@ -147,7 +147,7 @@ var showRecipe = /*#__PURE__*/function () {
           case 0:
             _context.prev = 0;
             _context.next = 3;
-            return fetch('https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886');
+            return fetch('https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886wwwww');
 
           case 3:
             res = _context.sent;
@@ -158,20 +158,29 @@ var showRecipe = /*#__PURE__*/function () {
             data = _context.sent;
             // to get data from fetch api and store it to the variable
             console.log(res, data);
-            _context.next = 13;
-            break;
+
+            if (res.ok) {
+              _context.next = 10;
+              break;
+            }
+
+            throw new Error("".concat(data.message, " (").concat(res.status, ")"));
 
           case 10:
-            _context.prev = 10;
+            _context.next = 15;
+            break;
+
+          case 12:
+            _context.prev = 12;
             _context.t0 = _context["catch"](0);
             alert(_context.t0);
 
-          case 13:
+          case 15:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 10]]);
+    }, _callee, null, [[0, 12]]);
   }));
 
   return function showRecipe() {
