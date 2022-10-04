@@ -14,7 +14,8 @@ const timeout = function (s) {
 const showRecipe = async function () {
   try {
     const res = await fetch(
-      'https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886'
+      `https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bcebc`
+      // 'https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886'
     );
     const data = await res.json(); // to get data from fetch api and store it to the variable
 

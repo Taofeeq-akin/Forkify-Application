@@ -147,7 +147,8 @@ var showRecipe = /*#__PURE__*/function () {
           case 0:
             _context.prev = 0;
             _context.next = 3;
-            return fetch('https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886');
+            return fetch("https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bcebc" // 'https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886'
+            );
 
           case 3:
             res = _context.sent;
