@@ -140,14 +140,14 @@ var timeout = function timeout(s) {
 
 var showRecipe = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-    var res, data;
+    var res, data, recipe;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
             _context.next = 3;
-            return fetch('https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886wwwww');
+            return fetch('https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886');
 
           case 3:
             res = _context.sent;
@@ -167,20 +167,22 @@ var showRecipe = /*#__PURE__*/function () {
             throw new Error("".concat(data.message, " (").concat(res.status, ")"));
 
           case 10:
-            _context.next = 15;
+            recipe = data.data.recipe; // since we have recipe on both side we can just distruct the variable
+
+            _context.next = 16;
             break;
 
-          case 12:
-            _context.prev = 12;
+          case 13:
+            _context.prev = 13;
             _context.t0 = _context["catch"](0);
             alert(_context.t0);
 
-          case 15:
+          case 16:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 12]]);
+    }, _callee, null, [[0, 13]]);
   }));
 
   return function showRecipe() {
