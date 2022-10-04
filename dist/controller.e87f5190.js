@@ -140,7 +140,7 @@ var timeout = function timeout(s) {
 
 var showRecipe = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-    var res;
+    var res, data;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -151,26 +151,35 @@ var showRecipe = /*#__PURE__*/function () {
 
           case 3:
             res = _context.sent;
-            _context.next = 9;
-            break;
+            _context.next = 6;
+            return res.json();
 
           case 6:
-            _context.prev = 6;
+            data = _context.sent;
+            // to get data from fetch api and store it to the variable
+            console.log(res, data);
+            _context.next = 13;
+            break;
+
+          case 10:
+            _context.prev = 10;
             _context.t0 = _context["catch"](0);
             alert(_context.t0);
 
-          case 9:
+          case 13:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 6]]);
+    }, _callee, null, [[0, 10]]);
   }));
 
   return function showRecipe() {
     return _ref.apply(this, arguments);
   };
 }();
+
+showRecipe();
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
