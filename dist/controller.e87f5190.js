@@ -874,6 +874,16 @@ try {
   }
 }
 
+},{}],"src/js/config.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.API_URL = void 0;
+// In this file we will be keeping reuseable variables and also responsible for kind of defining some important data about the app itself
+var API_URL = 'https://forkify-api.herokuapp.com/api/v2/recipes';
+exports.API_URL = API_URL;
 },{}],"src/js/module.js":[function(require,module,exports) {
 "use strict";
 
@@ -883,6 +893,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.state = exports.laodRecipe = void 0;
 
 var _regeneratorRuntime2 = require("regenerator-runtime");
+
+var _config = require("./config");
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
@@ -906,7 +918,7 @@ var laodRecipe = /*#__PURE__*/function () {
           case 0:
             _context.prev = 0;
             _context.next = 3;
-            return fetch("https://forkify-api.herokuapp.com/api/v2/recipes/".concat(id));
+            return fetch("".concat(_config.API_URL, "/").concat(id));
 
           case 3:
             res = _context.sent;
@@ -959,7 +971,7 @@ var laodRecipe = /*#__PURE__*/function () {
 }();
 
 exports.laodRecipe = laodRecipe;
-},{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js"}],"src/img/icons.svg":[function(require,module,exports) {
+},{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","./config":"src/js/config.js"}],"src/img/icons.svg":[function(require,module,exports) {
 module.exports = "/icons.ae3c38d5.svg";
 },{}],"node_modules/fraction.js/fraction.js":[function(require,module,exports) {
 var define;
