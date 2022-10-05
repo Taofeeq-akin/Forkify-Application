@@ -39,28 +39,6 @@ const showRecipe = async function () {
 
     // 1) Loading Recipe
     renderSpinner(recipeContainer);
-    const res = await fetch(
-      // `https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604691c37cdc054bd015`
-      `https://forkify-api.herokuapp.com/api/v2/recipes/${id}`
-    );
-    const data = await res.json(); // to get data from fetch api and store it to the variable
-
-    // console.log(res, data);
-
-    if (!res.ok) throw new Error(`${data.message} (${res.status})`);
-
-    let { recipe } = data.data; // since we have recipe on both side we can just distruct the variable
-    recipe = {
-      id: recipe.id,
-      title: recipe.title,
-      servings: recipe.servings,
-      sourceUrl: recipe.source_url,
-      publisher: recipe.publisher,
-      ingredients: recipe.ingredients,
-      image: recipe.image_url,
-      cookingTime: recipe.cooking_time,
-    };
-    console.log(recipe);
 
     // 2) Rendering Recipe
     const markup = `
