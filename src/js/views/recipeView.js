@@ -7,7 +7,7 @@ class RecipeView {
   #data;
 
   render(data) {
-    this.#data = data;
+    this.#data = data; // data will be (model.state.recipe) cus it will be picking render method from controller file
     const markup = this.#generateMarkup();
     this.#clear();
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);
@@ -137,4 +137,4 @@ class RecipeView {
 
 // Will create a new Recipe view object here to avoid going to open it in the controller js after export recipeView class
 
-export default new RecipeView();
+export default new RecipeView(); // Instaed of exporting class recipeView

@@ -27,8 +27,7 @@ const controlRecipes = async function () {
     recipeView.renderSpinner();
 
     // 1) Loading Recipe
-    await model.laodRecipe(id); // will return a peomise since its an async function
-    const { recipe } = model.state; // since recipe is now in state object
+    await model.laodRecipe(id); // will return a peomise since its an async function so we have to await it
 
     // 2) Rendering Recipe
     recipeView.render(model.state.recipe);
