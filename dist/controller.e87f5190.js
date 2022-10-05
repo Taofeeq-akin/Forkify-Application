@@ -961,7 +961,109 @@ var laodRecipe = /*#__PURE__*/function () {
 exports.laodRecipe = laodRecipe;
 },{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js"}],"src/img/icons.svg":[function(require,module,exports) {
 module.exports = "/icons.ae3c38d5.svg";
-},{}],"node_modules/core-js/internals/global.js":[function(require,module,exports) {
+},{}],"src/js/views/recipeView.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _icons = _interopRequireDefault(require("../../img/icons.svg"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
+
+function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
+
+function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
+
+function _classPrivateFieldGet(receiver, privateMap) { var descriptor = _classExtractFieldDescriptor(receiver, privateMap, "get"); return _classApplyDescriptorGet(receiver, descriptor); }
+
+function _classApplyDescriptorGet(receiver, descriptor) { if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
+
+function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
+
+function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = _classExtractFieldDescriptor(receiver, privateMap, "set"); _classApplyDescriptorSet(receiver, descriptor, value); return value; }
+
+function _classExtractFieldDescriptor(receiver, privateMap, action) { if (!privateMap.has(receiver)) { throw new TypeError("attempted to " + action + " private field on non-instance"); } return privateMap.get(receiver); }
+
+function _classApplyDescriptorSet(receiver, descriptor, value) { if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError("attempted to set read only private field"); } descriptor.value = value; } }
+
+var _parentElement = /*#__PURE__*/new WeakMap();
+
+var _data = /*#__PURE__*/new WeakMap();
+
+var _clear = /*#__PURE__*/new WeakSet();
+
+var _generateMarkup = /*#__PURE__*/new WeakSet();
+
+var RecipeView = /*#__PURE__*/function () {
+  function RecipeView() {
+    _classCallCheck(this, RecipeView);
+
+    _classPrivateMethodInitSpec(this, _generateMarkup);
+
+    _classPrivateMethodInitSpec(this, _clear);
+
+    _classPrivateFieldInitSpec(this, _parentElement, {
+      writable: true,
+      value: document.querySelector('.recipe')
+    });
+
+    _classPrivateFieldInitSpec(this, _data, {
+      writable: true,
+      value: void 0
+    });
+
+    _defineProperty(this, "renderSpinner", function () {
+      var markup = "\n      <div class=\"spinner\">\n        <svg>\n          <use href=\"".concat(_icons.default, "#icon-loader\"></use>\n        </svg>\n      </div>\n    ");
+      _classPrivateFieldGet(this, _parentElement).innerHTML = '';
+
+      _classPrivateFieldGet(this, _parentElement).insertAdjacentHTML('afterbegin', markup);
+    });
+  }
+
+  _createClass(RecipeView, [{
+    key: "render",
+    value: function render(data) {
+      _classPrivateFieldSet(this, _data, data);
+
+      var markup = _classPrivateMethodGet(this, _generateMarkup, _generateMarkup2).call(this);
+
+      _classPrivateMethodGet(this, _clear, _clear2).call(this);
+
+      _classPrivateFieldGet(this, _parentElement).insertAdjacentHTML('afterbegin', markup);
+    }
+  }]);
+
+  return RecipeView;
+}(); // Will create a new Recipe view object here to avoid going to open it in the controller js after export recipeView class
+
+
+function _clear2() {
+  _classPrivateFieldGet(this, _parentElement).innerHTML = '';
+}
+
+function _generateMarkup2() {
+  return "\n       <figure class=\"recipe__fig\">\n          <img src=\"".concat(_classPrivateFieldGet(this, _data).image, "\" alt=\"").concat(_classPrivateFieldGet(this, _data).title, "\" class=\"recipe__img\" />\n          <h1 class=\"recipe__title\">\n            <span>").concat(_classPrivateFieldGet(this, _data).title, "</span>\n          </h1>\n        </figure>\n\n        <div class=\"recipe__details\">\n          <div class=\"recipe__info\">\n            <svg class=\"recipe__info-icon\">\n              <use href=\"").concat(_icons.default, "#icon-clock\"></use>\n            </svg>\n            <span class=\"recipe__info-data recipe__info-data--minutes\">").concat(_classPrivateFieldGet(this, _data).cookingTime, "</span>\n            <span class=\"recipe__info-text\">minutes</span>\n          </div>\n          <div class=\"recipe__info\">\n            <svg class=\"recipe__info-icon\">\n              <use href=\"").concat(_icons.default, "#icon-users\"></use>\n            </svg>\n            <span class=\"recipe__info-data recipe__info-data--people\">").concat(_classPrivateFieldGet(this, _data).servings, "</span>\n            <span class=\"recipe__info-text\">servings</span>\n\n            <div class=\"recipe__info-buttons\">\n              <button class=\"btn--tiny btn--increase-servings\">\n                <svg>\n                  <use href=\"").concat(_icons.default, "#icon-minus-circle\"></use>\n                </svg>\n              </button>\n              <button class=\"btn--tiny btn--increase-servings\">\n                <svg>\n                  <use href=\"").concat(_icons.default, "#icon-plus-circle\"></use>\n                </svg>\n              </button>\n            </div>\n          </div>\n\n          <div class=\"recipe__user-generated\">\n            <svg>\n              <use href=\"").concat(_icons.default, "#icon-user\"></use>\n            </svg>\n          </div>\n          <button class=\"btn--round\">\n            <svg class=\"\">\n              <use href=\"").concat(_icons.default, "#icon-bookmark-fill\"></use>\n            </svg>\n          </button>\n        </div>\n\n        <div class=\"recipe__ingredients\">\n          <h2 class=\"heading--2\">Recipe ingredients</h2>\n          <ul class=\"recipe__ingredient-list\">\n          ").concat(_classPrivateFieldGet(this, _data).ingredients.map(function (ing) {
+    return "\n              <li class=\"recipe__ingredient\">\n                <svg class=\"recipe__icon\">\n                  <use href=\"".concat(_icons.default, "#icon-check\"></use>\n                </svg>\n                <div class=\"recipe__quantity\">").concat(ing.quantity, "</div>\n                <div class=\"recipe__description\">\n                  <span class=\"recipe__unit\">").concat(ing.unit, "</span>\n                  ").concat(ing.description, "\n                </div>\n              </li>\n            ");
+  }).join(''), " \n          </ul>\n        </div>\n\n        <div class=\"recipe__directions\">\n          <h2 class=\"heading--2\">How to cook it</h2>\n          <p class=\"recipe__directions-text\">\n            This this.#data was carefully designed and tested by\n            <span class=\"recipe__publisher\">").concat(_classPrivateFieldGet(this, _data).publisher, "</span>. Please check out\n            directions at their website.\n          </p>\n          <a\n            class=\"btn--small recipe__btn\"\n            href=\"").concat(_classPrivateFieldGet(this, _data).sourceUrl, "\"\n            target=\"_blank\"\n          >\n            <span>Directions</span>\n            <svg class=\"search__icon\">\n              <use href=\"src/img/icons.svg#icon-arrow-right\"></use>\n            </svg>\n          </a>\n        </div>\n    ");
+}
+
+var _default = new RecipeView();
+
+exports.default = _default;
+},{"../../img/icons.svg":"src/img/icons.svg"}],"node_modules/core-js/internals/global.js":[function(require,module,exports) {
 var global = arguments[3];
 var check = function (it) {
   return it && it.Math == Math && it;
@@ -16136,7 +16238,7 @@ module.exports = require('../internals/path');
 
 var model = _interopRequireWildcard(require("./module.js"));
 
-var _icons = _interopRequireDefault(require("../img/icons.svg"));
+var _recipeView = _interopRequireDefault(require("./views/recipeView.js"));
 
 require("core-js/stable");
 
@@ -16169,15 +16271,9 @@ var timeout = function timeout(s) {
 ///////////////////////////////////////
 
 
-var renderSpinner = function renderSpinner(parentEl) {
-  var markup = "\n    <div class=\"spinner\">\n      <svg>\n        <use href=\"".concat(_icons.default, "#icon-loader\"></use>\n      </svg>\n    </div>\n  ");
-  parentEl.innerHTML = '';
-  parentEl.insertAdjacentHTML('afterbegin', markup);
-};
-
-var showRecipe = /*#__PURE__*/function () {
+var controlRecipes = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-    var id, recipe, markup;
+    var id, recipe;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -16193,7 +16289,8 @@ var showRecipe = /*#__PURE__*/function () {
             return _context.abrupt("return");
 
           case 4:
-            renderSpinner(recipeContainer); // 1) Loading Recipe
+            _recipeView.default.renderSpinner(); // 1) Loading Recipe
+
 
             _context.next = 7;
             return model.laodRecipe(id);
@@ -16203,38 +16300,35 @@ var showRecipe = /*#__PURE__*/function () {
             recipe = model.state.recipe; // since recipe is now in state object
             // 2) Rendering Recipe
 
-            markup = "\n       <figure class=\"recipe__fig\">\n          <img src=\"".concat(recipe.image, "\" alt=\"").concat(recipe.title, "\" class=\"recipe__img\" />\n          <h1 class=\"recipe__title\">\n            <span>").concat(recipe.title, "</span>\n          </h1>\n        </figure>\n\n        <div class=\"recipe__details\">\n          <div class=\"recipe__info\">\n            <svg class=\"recipe__info-icon\">\n              <use href=\"").concat(_icons.default, "#icon-clock\"></use>\n            </svg>\n            <span class=\"recipe__info-data recipe__info-data--minutes\">").concat(recipe.cookingTime, "</span>\n            <span class=\"recipe__info-text\">minutes</span>\n          </div>\n          <div class=\"recipe__info\">\n            <svg class=\"recipe__info-icon\">\n              <use href=\"").concat(_icons.default, "#icon-users\"></use>\n            </svg>\n            <span class=\"recipe__info-data recipe__info-data--people\">").concat(recipe.servings, "</span>\n            <span class=\"recipe__info-text\">servings</span>\n\n            <div class=\"recipe__info-buttons\">\n              <button class=\"btn--tiny btn--increase-servings\">\n                <svg>\n                  <use href=\"").concat(_icons.default, "#icon-minus-circle\"></use>\n                </svg>\n              </button>\n              <button class=\"btn--tiny btn--increase-servings\">\n                <svg>\n                  <use href=\"").concat(_icons.default, "#icon-plus-circle\"></use>\n                </svg>\n              </button>\n            </div>\n          </div>\n\n          <div class=\"recipe__user-generated\">\n            <svg>\n              <use href=\"").concat(_icons.default, "#icon-user\"></use>\n            </svg>\n          </div>\n          <button class=\"btn--round\">\n            <svg class=\"\">\n              <use href=\"").concat(_icons.default, "#icon-bookmark-fill\"></use>\n            </svg>\n          </button>\n        </div>\n\n        <div class=\"recipe__ingredients\">\n          <h2 class=\"heading--2\">Recipe ingredients</h2>\n          <ul class=\"recipe__ingredient-list\">\n          ").concat(recipe.ingredients.map(function (ing) {
-              return "\n              <li class=\"recipe__ingredient\">\n                <svg class=\"recipe__icon\">\n                  <use href=\"".concat(_icons.default, "#icon-check\"></use>\n                </svg>\n                <div class=\"recipe__quantity\">").concat(ing.quantity, "</div>\n                <div class=\"recipe__description\">\n                  <span class=\"recipe__unit\">").concat(ing.unit, "</span>\n                  ").concat(ing.description, "\n                </div>\n              </li>\n            ");
-            }).join(''), " \n          </ul>\n        </div>\n\n        <div class=\"recipe__directions\">\n          <h2 class=\"heading--2\">How to cook it</h2>\n          <p class=\"recipe__directions-text\">\n            This recipe was carefully designed and tested by\n            <span class=\"recipe__publisher\">").concat(recipe.publisher, "</span>. Please check out\n            directions at their website.\n          </p>\n          <a\n            class=\"btn--small recipe__btn\"\n            href=\"").concat(recipe.sourceUrl, "\"\n            target=\"_blank\"\n          >\n            <span>Directions</span>\n            <svg class=\"search__icon\">\n              <use href=\"src/img/icons.svg#icon-arrow-right\"></use>\n            </svg>\n          </a>\n        </div>\n    ");
-            recipeContainer.innerHTML = '';
-            recipeContainer.insertAdjacentHTML('afterbegin', markup);
-            _context.next = 16;
+            _recipeView.default.render(model.state.recipe);
+
+            _context.next = 14;
             break;
 
-          case 13:
-            _context.prev = 13;
+          case 11:
+            _context.prev = 11;
             _context.t0 = _context["catch"](0);
             alert(_context.t0);
 
-          case 16:
+          case 14:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 13]]);
+    }, _callee, null, [[0, 11]]);
   }));
 
-  return function showRecipe() {
+  return function controlRecipes() {
     return _ref.apply(this, arguments);
   };
 }();
 
 ['hashchange', 'load'].forEach(function (ev) {
-  return window.addEventListener(ev, showRecipe);
+  return window.addEventListener(ev, controlRecipes);
 }); // loop over instaed of listening to events multiple times
 // window.addEventListener('hashchange', showRecipe);
 // window.addEventListener('load', showRecipe); // to make the window load if just open
-},{"./module.js":"src/js/module.js","../img/icons.svg":"src/img/icons.svg","core-js/stable":"node_modules/core-js/stable/index.js","regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./module.js":"src/js/module.js","./views/recipeView.js":"src/js/views/recipeView.js","core-js/stable":"node_modules/core-js/stable/index.js","regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -16262,7 +16356,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51715" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55883" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
