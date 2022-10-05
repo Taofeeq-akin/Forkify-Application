@@ -1865,7 +1865,7 @@ exports.default = void 0;
 
 var _icons = _interopRequireDefault(require("../../img/icons.svg"));
 
-var _fraction = _interopRequireDefault(require("fraction.js"));
+var _fraction = require("fraction.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1895,7 +1895,7 @@ function _classExtractFieldDescriptor(receiver, privateMap, action) { if (!priva
 
 function _classApplyDescriptorSet(receiver, descriptor, value) { if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError("attempted to set read only private field"); } descriptor.value = value; } }
 
-console.log(_fraction.default);
+console.log(_fraction.Fraction);
 
 var _parentElement = /*#__PURE__*/new WeakMap();
 
@@ -1905,9 +1905,13 @@ var _clear = /*#__PURE__*/new WeakSet();
 
 var _generateMarkup = /*#__PURE__*/new WeakSet();
 
+var _generateMarkupIngredient = /*#__PURE__*/new WeakSet();
+
 var RecipeView = /*#__PURE__*/function () {
   function RecipeView() {
     _classCallCheck(this, RecipeView);
+
+    _classPrivateMethodInitSpec(this, _generateMarkupIngredient);
 
     _classPrivateMethodInitSpec(this, _generateMarkup);
 
@@ -1953,9 +1957,11 @@ function _clear2() {
 }
 
 function _generateMarkup2() {
-  return "\n       <figure class=\"recipe__fig\">\n          <img src=\"".concat(_classPrivateFieldGet(this, _data).image, "\" alt=\"").concat(_classPrivateFieldGet(this, _data).title, "\" class=\"recipe__img\" />\n          <h1 class=\"recipe__title\">\n            <span>").concat(_classPrivateFieldGet(this, _data).title, "</span>\n          </h1>\n        </figure>\n\n        <div class=\"recipe__details\">\n          <div class=\"recipe__info\">\n            <svg class=\"recipe__info-icon\">\n              <use href=\"").concat(_icons.default, "#icon-clock\"></use>\n            </svg>\n            <span class=\"recipe__info-data recipe__info-data--minutes\">").concat(_classPrivateFieldGet(this, _data).cookingTime, "</span>\n            <span class=\"recipe__info-text\">minutes</span>\n          </div>\n          <div class=\"recipe__info\">\n            <svg class=\"recipe__info-icon\">\n              <use href=\"").concat(_icons.default, "#icon-users\"></use>\n            </svg>\n            <span class=\"recipe__info-data recipe__info-data--people\">").concat(_classPrivateFieldGet(this, _data).servings, "</span>\n            <span class=\"recipe__info-text\">servings</span>\n\n            <div class=\"recipe__info-buttons\">\n              <button class=\"btn--tiny btn--increase-servings\">\n                <svg>\n                  <use href=\"").concat(_icons.default, "#icon-minus-circle\"></use>\n                </svg>\n              </button>\n              <button class=\"btn--tiny btn--increase-servings\">\n                <svg>\n                  <use href=\"").concat(_icons.default, "#icon-plus-circle\"></use>\n                </svg>\n              </button>\n            </div>\n          </div>\n\n          <div class=\"recipe__user-generated\">\n            <svg>\n              <use href=\"").concat(_icons.default, "#icon-user\"></use>\n            </svg>\n          </div>\n          <button class=\"btn--round\">\n            <svg class=\"\">\n              <use href=\"").concat(_icons.default, "#icon-bookmark-fill\"></use>\n            </svg>\n          </button>\n        </div>\n\n        <div class=\"recipe__ingredients\">\n          <h2 class=\"heading--2\">Recipe ingredients</h2>\n          <ul class=\"recipe__ingredient-list\">\n          ").concat(_classPrivateFieldGet(this, _data).ingredients.map(function (ing) {
-    return "\n              <li class=\"recipe__ingredient\">\n                <svg class=\"recipe__icon\">\n                  <use href=\"".concat(_icons.default, "#icon-check\"></use>\n                </svg>\n                <div class=\"recipe__quantity\">").concat(ing.quantity ? new _fraction.default(ing.quantity).toFraction(true) : '', "</div>\n                <div class=\"recipe__description\">\n                  <span class=\"recipe__unit\">").concat(ing.unit, "</span>\n                  ").concat(ing.description, "\n                </div>\n              </li>\n            ");
-  }).join(''), " \n          </ul>\n        </div>\n\n        <div class=\"recipe__directions\">\n          <h2 class=\"heading--2\">How to cook it</h2>\n          <p class=\"recipe__directions-text\">\n            This this.#data was carefully designed and tested by\n            <span class=\"recipe__publisher\">").concat(_classPrivateFieldGet(this, _data).publisher, "</span>. Please check out\n            directions at their website.\n          </p>\n          <a\n            class=\"btn--small recipe__btn\"\n            href=\"").concat(_classPrivateFieldGet(this, _data).sourceUrl, "\"\n            target=\"_blank\"\n          >\n            <span>Directions</span>\n            <svg class=\"search__icon\">\n              <use href=\"src/img/icons.svg#icon-arrow-right\"></use>\n            </svg>\n          </a>\n        </div>\n    ");
+  return "\n       <figure class=\"recipe__fig\">\n          <img src=\"".concat(_classPrivateFieldGet(this, _data).image, "\" alt=\"").concat(_classPrivateFieldGet(this, _data).title, "\" class=\"recipe__img\" />\n          <h1 class=\"recipe__title\">\n            <span>").concat(_classPrivateFieldGet(this, _data).title, "</span>\n          </h1>\n        </figure>\n\n        <div class=\"recipe__details\">\n          <div class=\"recipe__info\">\n            <svg class=\"recipe__info-icon\">\n              <use href=\"").concat(_icons.default, "#icon-clock\"></use>\n            </svg>\n            <span class=\"recipe__info-data recipe__info-data--minutes\">").concat(_classPrivateFieldGet(this, _data).cookingTime, "</span>\n            <span class=\"recipe__info-text\">minutes</span>\n          </div>\n          <div class=\"recipe__info\">\n            <svg class=\"recipe__info-icon\">\n              <use href=\"").concat(_icons.default, "#icon-users\"></use>\n            </svg>\n            <span class=\"recipe__info-data recipe__info-data--people\">").concat(_classPrivateFieldGet(this, _data).servings, "</span>\n            <span class=\"recipe__info-text\">servings</span>\n\n            <div class=\"recipe__info-buttons\">\n              <button class=\"btn--tiny btn--increase-servings\">\n                <svg>\n                  <use href=\"").concat(_icons.default, "#icon-minus-circle\"></use>\n                </svg>\n              </button>\n              <button class=\"btn--tiny btn--increase-servings\">\n                <svg>\n                  <use href=\"").concat(_icons.default, "#icon-plus-circle\"></use>\n                </svg>\n              </button>\n            </div>\n          </div>\n\n          <div class=\"recipe__user-generated\">\n            <svg>\n              <use href=\"").concat(_icons.default, "#icon-user\"></use>\n            </svg>\n          </div>\n          <button class=\"btn--round\">\n            <svg class=\"\">\n              <use href=\"").concat(_icons.default, "#icon-bookmark-fill\"></use>\n            </svg>\n          </button>\n        </div>\n\n        <div class=\"recipe__ingredients\">\n          <h2 class=\"heading--2\">Recipe ingredients</h2>\n          <ul class=\"recipe__ingredient-list\">\n          ").concat(_classPrivateFieldGet(this, _data).ingredients.map(_classPrivateMethodGet(this, _generateMarkupIngredient, _generateMarkupIngredient2)).join(''), " \n          </ul>\n        </div>\n\n        <div class=\"recipe__directions\">\n          <h2 class=\"heading--2\">How to cook it</h2>\n          <p class=\"recipe__directions-text\">\n            This this.#data was carefully designed and tested by\n            <span class=\"recipe__publisher\">").concat(_classPrivateFieldGet(this, _data).publisher, "</span>. Please check out\n            directions at their website.\n          </p>\n          <a\n            class=\"btn--small recipe__btn\"\n            href=\"").concat(_classPrivateFieldGet(this, _data).sourceUrl, "\"\n            target=\"_blank\"\n          >\n            <span>Directions</span>\n            <svg class=\"search__icon\">\n              <use href=\"src/img/icons.svg#icon-arrow-right\"></use>\n            </svg>\n          </a>\n        </div>\n    ");
+}
+
+function _generateMarkupIngredient2(ing) {
+  return "\n    <li class=\"recipe__ingredient\">\n      <svg class=\"recipe__icon\">\n        <use href=\"".concat(_icons.default, "#icon-check\"></use>\n      </svg>\n      <div class=\"recipe__quantity\">").concat(ing.quantity ? new _fraction.Fraction(ing.quantity).toFraction(true) : '', "</div>\n      <div class=\"recipe__description\">\n        <span class=\"recipe__unit\">").concat(ing.unit, "</span>\n        ").concat(ing.description, "\n      </div>\n    </li>\n  ");
 }
 
 var _default = new RecipeView();
