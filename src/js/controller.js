@@ -34,6 +34,9 @@ const showRecipe = async function () {
   try {
     const id = window.location.hash.slice(1);
     // console.log(id);
+
+    if (!id) throw new Error('missing ID');
+
     // 1) Loading Recipe
     renderSpinner(recipeContainer);
     const res = await fetch(

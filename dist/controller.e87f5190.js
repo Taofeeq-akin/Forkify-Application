@@ -16093,29 +16093,37 @@ var showRecipe = /*#__PURE__*/function () {
           case 0:
             _context.prev = 0;
             id = window.location.hash.slice(1); // console.log(id);
-            // 1) Loading Recipe
 
+            if (id) {
+              _context.next = 4;
+              break;
+            }
+
+            throw new Error('missing ID');
+
+          case 4:
+            // 1) Loading Recipe
             renderSpinner(recipeContainer);
-            _context.next = 5;
+            _context.next = 7;
             return fetch( // `https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604691c37cdc054bd015`
             "https://forkify-api.herokuapp.com/api/v2/recipes/".concat(id));
 
-          case 5:
+          case 7:
             res = _context.sent;
-            _context.next = 8;
+            _context.next = 10;
             return res.json();
 
-          case 8:
+          case 10:
             data = _context.sent;
 
             if (res.ok) {
-              _context.next = 11;
+              _context.next = 13;
               break;
             }
 
             throw new Error("".concat(data.message, " (").concat(res.status, ")"));
 
-          case 11:
+          case 13:
             recipe = data.data.recipe; // since we have recipe on both side we can just distruct the variable
 
             recipe = {
@@ -16135,20 +16143,20 @@ var showRecipe = /*#__PURE__*/function () {
             }).join(''), " \n          </ul>\n        </div>\n\n        <div class=\"recipe__directions\">\n          <h2 class=\"heading--2\">How to cook it</h2>\n          <p class=\"recipe__directions-text\">\n            This recipe was carefully designed and tested by\n            <span class=\"recipe__publisher\">").concat(recipe.publisher, "</span>. Please check out\n            directions at their website.\n          </p>\n          <a\n            class=\"btn--small recipe__btn\"\n            href=\"").concat(recipe.sourceUrl, "\"\n            target=\"_blank\"\n          >\n            <span>Directions</span>\n            <svg class=\"search__icon\">\n              <use href=\"src/img/icons.svg#icon-arrow-right\"></use>\n            </svg>\n          </a>\n        </div>\n    ");
             recipeContainer.innerHTML = '';
             recipeContainer.insertAdjacentHTML('afterbegin', markup);
-            _context.next = 22;
+            _context.next = 24;
             break;
 
-          case 19:
-            _context.prev = 19;
+          case 21:
+            _context.prev = 21;
             _context.t0 = _context["catch"](0);
             alert(_context.t0);
 
-          case 22:
+          case 24:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 19]]);
+    }, _callee, null, [[0, 21]]);
   }));
 
   return function showRecipe() {
