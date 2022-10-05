@@ -16065,7 +16065,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-console.log(_icons.default);
 //regenerator-runtime for polifying async await
 var recipeContainer = document.querySelector('.recipe');
 
@@ -16087,34 +16086,36 @@ var renderSpinner = function renderSpinner(parentEl) {
 
 var showRecipe = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-    var res, data, recipe, markup;
+    var id, res, data, recipe, markup;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
+            id = window.location.hash.slice(1); // console.log(id);
             // 1) Loading Recipe
-            renderSpinner(recipeContainer);
-            _context.next = 4;
-            return fetch( // `https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604691c37cdc054bd015`
-            'https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886');
 
-          case 4:
+            renderSpinner(recipeContainer);
+            _context.next = 5;
+            return fetch( // `https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604691c37cdc054bd015`
+            "https://forkify-api.herokuapp.com/api/v2/recipes/".concat(id));
+
+          case 5:
             res = _context.sent;
-            _context.next = 7;
+            _context.next = 8;
             return res.json();
 
-          case 7:
+          case 8:
             data = _context.sent;
 
             if (res.ok) {
-              _context.next = 10;
+              _context.next = 11;
               break;
             }
 
             throw new Error("".concat(data.message, " (").concat(res.status, ")"));
 
-          case 10:
+          case 11:
             recipe = data.data.recipe; // since we have recipe on both side we can just distruct the variable
 
             recipe = {
@@ -16134,20 +16135,20 @@ var showRecipe = /*#__PURE__*/function () {
             }).join(''), " \n          </ul>\n        </div>\n\n        <div class=\"recipe__directions\">\n          <h2 class=\"heading--2\">How to cook it</h2>\n          <p class=\"recipe__directions-text\">\n            This recipe was carefully designed and tested by\n            <span class=\"recipe__publisher\">").concat(recipe.publisher, "</span>. Please check out\n            directions at their website.\n          </p>\n          <a\n            class=\"btn--small recipe__btn\"\n            href=\"").concat(recipe.sourceUrl, "\"\n            target=\"_blank\"\n          >\n            <span>Directions</span>\n            <svg class=\"search__icon\">\n              <use href=\"src/img/icons.svg#icon-arrow-right\"></use>\n            </svg>\n          </a>\n        </div>\n    ");
             recipeContainer.innerHTML = '';
             recipeContainer.insertAdjacentHTML('afterbegin', markup);
-            _context.next = 21;
+            _context.next = 22;
             break;
 
-          case 18:
-            _context.prev = 18;
+          case 19:
+            _context.prev = 19;
             _context.t0 = _context["catch"](0);
             alert(_context.t0);
 
-          case 21:
+          case 22:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 18]]);
+    }, _callee, null, [[0, 19]]);
   }));
 
   return function showRecipe() {
@@ -16155,7 +16156,7 @@ var showRecipe = /*#__PURE__*/function () {
   };
 }();
 
-showRecipe();
+window.addEventListener('hashchange', showRecipe);
 },{"../img/icons.svg":"src/img/icons.svg","core-js/stable":"node_modules/core-js/stable/index.js","regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
