@@ -1,6 +1,6 @@
-import icons from '../img/icons.svg';
-// console.log(icons);
+import * as model from './module.js';
 
+import icons from '../img/icons.svg';
 import 'core-js/stable'; // install for pollying all
 import 'regenerator-runtime/runtime'; //regenerator-runtime for polifying async await
 
@@ -35,10 +35,12 @@ const showRecipe = async function () {
     const id = window.location.hash.slice(1);
     // console.log(id);
 
-    if (!id) throw new Error('missing ID');
+    if (!id) return;
+    renderSpinner(recipeContainer);
 
     // 1) Loading Recipe
-    renderSpinner(recipeContainer);
+    await model.laodRecipe(id); // will return a peomise since its an async function
+    const { recipe } = model.state; // since recipe is now in state object
 
     // 2) Rendering Recipe
     const markup = `
