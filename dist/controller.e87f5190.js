@@ -16156,7 +16156,11 @@ var showRecipe = /*#__PURE__*/function () {
   };
 }();
 
-window.addEventListener('hashchange', showRecipe);
+['hashchange', 'load'].forEach(function (ev) {
+  return window.addEventListener(ev, showRecipe);
+}); // loop over instaed of listening to events multiple times
+// window.addEventListener('hashchange', showRecipe);
+// window.addEventListener('load', showRecipe); // to make the window load if just open
 },{"../img/icons.svg":"src/img/icons.svg","core-js/stable":"node_modules/core-js/stable/index.js","regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
