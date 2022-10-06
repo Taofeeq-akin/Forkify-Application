@@ -1978,6 +1978,8 @@ var _data = /*#__PURE__*/new WeakMap();
 
 var _errorMessage = /*#__PURE__*/new WeakMap();
 
+var _message = /*#__PURE__*/new WeakMap();
+
 var _clear = /*#__PURE__*/new WeakSet();
 
 var _generateMarkup = /*#__PURE__*/new WeakSet();
@@ -2009,6 +2011,11 @@ var RecipeView = /*#__PURE__*/function () {
       writable: true,
       value: 'We could not find the recipe. Please try again.'
     });
+
+    _classPrivateFieldInitSpec(this, _message, {
+      writable: true,
+      value: ''
+    });
   }
 
   _createClass(RecipeView, [{
@@ -2031,12 +2038,23 @@ var RecipeView = /*#__PURE__*/function () {
       _classPrivateMethodGet(this, _clear, _clear2).call(this);
 
       _classPrivateFieldGet(this, _parentElement).insertAdjacentHTML('afterbegin', markup);
+    } // This will be for succes message
+
+  }, {
+    key: "renderMessage",
+    value: function renderMessage() {
+      var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _classPrivateFieldGet(this, _errorMessage);
+      var markup = "\n    <div class=\"error\">\n            <div>\n              <svg>\n                <use href=\"".concat(_icons.default, "#icon-alert-triangle\"></use>\n              </svg>\n            </div>\n            <p>").concat(message, "</p>\n          </div>\n    ");
+
+      _classPrivateMethodGet(this, _clear, _clear2).call(this);
+
+      _classPrivateFieldGet(this, _parentElement).insertAdjacentHTML('afterbegin', markup);
     }
   }, {
     key: "renderError",
     value: function renderError() {
-      var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _classPrivateFieldGet(this, _errorMessage);
-      var markup = "\n    <div class=\"error\">\n            <div>\n              <svg>\n                <use href=\"".concat(_icons.default, "#icon-alert-triangle\"></use>\n              </svg>\n            </div>\n            <p>").concat(message, "</p>\n          </div>\n    ");
+      var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _classPrivateFieldGet(this, _message);
+      var markup = "\n    <div class=\"message\">\n            <div>\n              <svg>\n                <use href=\"".concat(_icons.default, "#icon-smile\"></use>\n              </svg>\n            </div>\n            <p>").concat(message, "</p>\n          </div>\n    ");
 
       _classPrivateMethodGet(this, _clear, _clear2).call(this);
 

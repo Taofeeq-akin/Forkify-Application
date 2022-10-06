@@ -6,6 +6,7 @@ class RecipeView {
   #parentElement = document.querySelector('.recipe');
   #data;
   #errorMessage = 'We could not find the recipe. Please try again.';
+  #message = '';
 
   render(data) {
     this.#data = data; // data will be (model.state.recipe) cus it will be picking render method from controller file
@@ -30,12 +31,28 @@ class RecipeView {
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);
   }
 
-  renderError(message = this.#errorMessage) {
+  // This will be for succes message
+  renderMessage(message = this.#errorMessage) {
     const markup = `
     <div class="error">
             <div>
               <svg>
                 <use href="${icons}#icon-alert-triangle"></use>
+              </svg>
+            </div>
+            <p>${message}</p>
+          </div>
+    `;
+    this.#clear();
+    this.#parentElement.insertAdjacentHTML('afterbegin', markup);
+  }
+
+  renderError(message = this.#message) {
+    const markup = `
+    <div class="message">
+            <div>
+              <svg>
+                <use href="${icons}#icon-smile"></use>
               </svg>
             </div>
             <p>${message}</p>
