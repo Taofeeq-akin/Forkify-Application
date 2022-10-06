@@ -1,5 +1,6 @@
 import { async } from 'regenerator-runtime';
-import { API_URL } from './config';
+import { API_URL } from './config.js';
+import { getJSON } from './helper.js';
 
 export const state = {
   recipe: {},
@@ -7,11 +8,8 @@ export const state = {
 
 export const laodRecipe = async function (id) {
   try {
-    const res = await fetch(`${API_URL}/${id}`);
-    const data = await res.json(); // to get data from fetch api and store it to the variable
-    // console.log(res, data);
-
-    if (!res.ok) throw new Error(`${data.message} (${res.status})`);
+    const data = await getJSON(`${API_URL}/${id}`);
+    console.log(data);
 
     const { recipe } = data.data; // since we have recipe on both side we can just distruct the variable
     state.recipe = {
@@ -26,6 +24,7 @@ export const laodRecipe = async function (id) {
     };
     console.log(state.recipe);
   } catch (err) {
-    alert(err);
+    // Temp error handling
+    console.log(`${err} 😒😒😒`);
   }
 };
