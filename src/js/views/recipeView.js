@@ -29,6 +29,21 @@ class RecipeView {
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);
   }
 
+  renderError(message) {
+    const markup = `
+    <div class="error">
+            <div>
+              <svg>
+                <use href="${icons}#icon-alert-triangle"></use>
+              </svg>
+            </div>
+            <p>${message}</p>
+          </div>
+    `;
+    this.#clear();
+    this.#parentElement.insertAdjacentHTML('afterbegin', markup);
+  }
+
   // Will be using Publisher-Subscriber Pattern cus we not meant to be liatening to handler in contoller js file
   //So here is the publisher
   addHandlerRender(handler) {

@@ -2025,6 +2025,15 @@ var RecipeView = /*#__PURE__*/function () {
       _classPrivateMethodGet(this, _clear, _clear2).call(this);
 
       _classPrivateFieldGet(this, _parentElement).insertAdjacentHTML('afterbegin', markup);
+    }
+  }, {
+    key: "renderError",
+    value: function renderError(message) {
+      var markup = "\n    <div class=\"error\">\n            <div>\n              <svg>\n                <use href=\"".concat(_icons.default, "#icon-alert-triangle\"></use>\n              </svg>\n            </div>\n            <p>").concat(message, "</p>\n          </div>\n    ");
+
+      _classPrivateMethodGet(this, _clear, _clear2).call(this);
+
+      _classPrivateFieldGet(this, _parentElement).insertAdjacentHTML('afterbegin', markup);
     } // Will be using Publisher-Subscriber Pattern cus we not meant to be liatening to handler in contoller js file
     //So here is the publisher
 
