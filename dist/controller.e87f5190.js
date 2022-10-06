@@ -17304,7 +17304,14 @@ var controlRecipes = /*#__PURE__*/function () {
   return function controlRecipes() {
     return _ref.apply(this, arguments);
   };
-}(); // window.addEventListener('hashchange', showRecipe);
+}(); // This wil be our Subcriber
+
+
+var init = function init() {
+  _recipeView.default.addHandlerRender(controlRecipes);
+};
+
+init(); // window.addEventListener('hashchange', showRecipe);
 // window.addEventListener('load', showRecipe); // to make the window load if just open
 },{"./module.js":"src/js/module.js","./views/recipeView.js":"src/js/views/recipeView.js","core-js/stable":"node_modules/core-js/stable/index.js","regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];

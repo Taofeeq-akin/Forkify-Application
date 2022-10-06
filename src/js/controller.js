@@ -28,5 +28,11 @@ const controlRecipes = async function () {
   }
 };
 
+// This wil be our Subcriber
+const init = function () {
+  recipeView.addHandlerRender(controlRecipes);
+};
+init();
+
 // window.addEventListener('hashchange', showRecipe);
 // window.addEventListener('load', showRecipe); // to make the window load if just open
