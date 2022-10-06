@@ -28,9 +28,5 @@ const controlRecipes = async function () {
   }
 };
 
-['hashchange', 'load'].forEach(ev =>
-  window.addEventListener(ev, controlRecipes)
-); // loop over instaed of listening to events multiple times
-
 // window.addEventListener('hashchange', showRecipe);
 // window.addEventListener('load', showRecipe); // to make the window load if just open

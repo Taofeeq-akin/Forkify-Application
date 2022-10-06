@@ -29,6 +29,12 @@ class RecipeView {
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);
   };
 
+  // Will be using Publisher-Subscriber Pattern cus we not meant to be liatening to handler in contoller js file
+  //So here is the publisher
+  addHandlerRender(handler) {
+    ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, handler)); // loop over instaed of listening to events multiple times
+  }
+
   #generateMarkup() {
     return `
        <figure class="recipe__fig">

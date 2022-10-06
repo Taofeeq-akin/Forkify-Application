@@ -2026,6 +2026,15 @@ var RecipeView = /*#__PURE__*/function () {
 
       _classPrivateFieldGet(this, _parentElement).insertAdjacentHTML('afterbegin', markup);
     }
+  }, {
+    key: "addHandlerRender",
+    value: // Will be using Publisher-Subscriber Pattern cus we not meant to be liatening to handler in contoller js file
+    //So here is the publisher
+    function addHandlerRender(handler) {
+      ['hashchange', 'load'].forEach(function (ev) {
+        return window.addEventListener(ev, handler);
+      }); // loop over instaed of listening to events multiple times
+    }
   }]);
 
   return RecipeView;
@@ -17295,12 +17304,7 @@ var controlRecipes = /*#__PURE__*/function () {
   return function controlRecipes() {
     return _ref.apply(this, arguments);
   };
-}();
-
-['hashchange', 'load'].forEach(function (ev) {
-  return window.addEventListener(ev, controlRecipes);
-}); // loop over instaed of listening to events multiple times
-// window.addEventListener('hashchange', showRecipe);
+}(); // window.addEventListener('hashchange', showRecipe);
 // window.addEventListener('load', showRecipe); // to make the window load if just open
 },{"./module.js":"src/js/module.js","./views/recipeView.js":"src/js/views/recipeView.js","core-js/stable":"node_modules/core-js/stable/index.js","regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
