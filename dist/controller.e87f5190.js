@@ -1955,8 +1955,6 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
 
 function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
@@ -2005,13 +2003,6 @@ var RecipeView = /*#__PURE__*/function () {
       writable: true,
       value: void 0
     });
-
-    _defineProperty(this, "renderSpinner", function () {
-      var markup = "\n      <div class=\"spinner\">\n        <svg>\n          <use href=\"".concat(_icons.default, "#icon-loader\"></use>\n        </svg>\n      </div>\n    ");
-      _classPrivateFieldGet(this, _parentElement).innerHTML = '';
-
-      _classPrivateFieldGet(this, _parentElement).insertAdjacentHTML('afterbegin', markup);
-    });
   }
 
   _createClass(RecipeView, [{
@@ -2027,10 +2018,19 @@ var RecipeView = /*#__PURE__*/function () {
       _classPrivateFieldGet(this, _parentElement).insertAdjacentHTML('afterbegin', markup);
     }
   }, {
-    key: "addHandlerRender",
-    value: // Will be using Publisher-Subscriber Pattern cus we not meant to be liatening to handler in contoller js file
+    key: "renderSpinner",
+    value: function renderSpinner() {
+      var markup = "\n      <div class=\"spinner\">\n        <svg>\n          <use href=\"".concat(_icons.default, "#icon-loader\"></use>\n        </svg>\n      </div>\n    ");
+
+      _classPrivateMethodGet(this, _clear, _clear2).call(this);
+
+      _classPrivateFieldGet(this, _parentElement).insertAdjacentHTML('afterbegin', markup);
+    } // Will be using Publisher-Subscriber Pattern cus we not meant to be liatening to handler in contoller js file
     //So here is the publisher
-    function addHandlerRender(handler) {
+
+  }, {
+    key: "addHandlerRender",
+    value: function addHandlerRender(handler) {
       ['hashchange', 'load'].forEach(function (ev) {
         return window.addEventListener(ev, handler);
       }); // loop over instaed of listening to events multiple times
