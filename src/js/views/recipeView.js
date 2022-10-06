@@ -5,6 +5,7 @@ import { Fraction } from 'fraction.js';
 class RecipeView {
   #parentElement = document.querySelector('.recipe');
   #data;
+  #errorMessage = 'We could not find the recipe. Please try again.';
 
   render(data) {
     this.#data = data; // data will be (model.state.recipe) cus it will be picking render method from controller file
@@ -29,7 +30,7 @@ class RecipeView {
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);
   }
 
-  renderError(message) {
+  renderError(message = this.#errorMessage) {
     const markup = `
     <div class="error">
             <div>

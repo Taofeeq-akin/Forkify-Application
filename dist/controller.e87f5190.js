@@ -1022,8 +1022,7 @@ var laodRecipe = /*#__PURE__*/function () {
           case 10:
             _context.prev = 10;
             _context.t0 = _context["catch"](0);
-            // Temp error handling
-            console.log("".concat(_context.t0, " \uD83D\uDE12\uD83D\uDE12\uD83D\uDE12"));
+            throw _context.t0;
 
           case 13:
           case "end":
@@ -1977,6 +1976,8 @@ var _parentElement = /*#__PURE__*/new WeakMap();
 
 var _data = /*#__PURE__*/new WeakMap();
 
+var _errorMessage = /*#__PURE__*/new WeakMap();
+
 var _clear = /*#__PURE__*/new WeakSet();
 
 var _generateMarkup = /*#__PURE__*/new WeakSet();
@@ -2003,6 +2004,11 @@ var RecipeView = /*#__PURE__*/function () {
       writable: true,
       value: void 0
     });
+
+    _classPrivateFieldInitSpec(this, _errorMessage, {
+      writable: true,
+      value: 'We could not find the recipe. Please try again.'
+    });
   }
 
   _createClass(RecipeView, [{
@@ -2028,7 +2034,8 @@ var RecipeView = /*#__PURE__*/function () {
     }
   }, {
     key: "renderError",
-    value: function renderError(message) {
+    value: function renderError() {
+      var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _classPrivateFieldGet(this, _errorMessage);
       var markup = "\n    <div class=\"error\">\n            <div>\n              <svg>\n                <use href=\"".concat(_icons.default, "#icon-alert-triangle\"></use>\n              </svg>\n            </div>\n            <p>").concat(message, "</p>\n          </div>\n    ");
 
       _classPrivateMethodGet(this, _clear, _clear2).call(this);
@@ -17300,7 +17307,8 @@ var controlRecipes = /*#__PURE__*/function () {
           case 10:
             _context.prev = 10;
             _context.t0 = _context["catch"](0);
-            alert(_context.t0);
+
+            _recipeView.default.renderError();
 
           case 13:
           case "end":
