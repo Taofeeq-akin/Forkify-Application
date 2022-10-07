@@ -1,68 +1,13 @@
-import { View } from './view.js';
+import View from './view.js';
 
 import icons from '../../img/icons.svg';
 import { Fraction } from 'fraction.js';
 // console.log(Fraction);
 
-class RecipeView {
+class RecipeView extends View {
   _parentElement = document.querySelector('.recipe');
-  _data;
   _errorMessage = 'We could not find the recipe. Please try again.';
   _message = '';
-
-  render(data) {
-    this._data = data; // data will be (model.state.recipe) cus it will be picking render method from controller file
-    const markup = this._generateMarkup();
-    this._clear();
-    this._parentElement.insertAdjacentHTML('afterbegin', markup);
-  }
-
-  _clear() {
-    this._parentElement.innerHTML = '';
-  }
-
-  renderSpinner() {
-    const markup = `
-      <div class="spinner">
-        <svg>
-          <use href="${icons}#icon-loader"></use>
-        </svg>
-      </div>
-    `;
-    this._clear();
-    this._parentElement.insertAdjacentHTML('afterbegin', markup);
-  }
-
-  // This will be for succes message
-  renderMessage(message = this._message) {
-    const markup = `
-    <div class="error">
-            <div>
-              <svg>
-                <use href="${icons}#icon-alert-triangle"></use>
-              </svg>
-            </div>
-            <p>${message}</p>
-          </div>
-    `;
-    this._clear();
-    this._parentElement.insertAdjacentHTML('afterbegin', markup);
-  }
-
-  renderError(message = this._errorMessage) {
-    const markup = `
-    <div class="message">
-            <div>
-              <svg>
-                <use href="${icons}#icon-smile"></use>
-              </svg>
-            </div>
-            <p>${message}</p>
-          </div>
-    `;
-    this._clear();
-    this._parentElement.insertAdjacentHTML('afterbegin', markup);
-  }
 
   // Will be using Publisher-Subscriber Pattern cus we not meant to be liatening to handler in contoller js file
   //So here is the publisher

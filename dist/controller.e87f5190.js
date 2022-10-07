@@ -1095,28 +1095,88 @@ var loadSearchResults = /*#__PURE__*/function () {
 }();
 
 exports.loadSearchResults = loadSearchResults;
-},{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","./config.js":"src/js/config.js","./helper.js":"src/js/helper.js"}],"src/js/views/view.js":[function(require,module,exports) {
+},{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","./config.js":"src/js/config.js","./helper.js":"src/js/helper.js"}],"src/img/icons.svg":[function(require,module,exports) {
+module.exports = "/icons.ae3c38d5.svg";
+},{}],"src/js/views/view.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.View = void 0;
+exports.default = void 0;
+
+var _icons = _interopRequireDefault(require("../../img/icons.svg"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var View = /*#__PURE__*/_createClass(function View() {
-  _classCallCheck(this, View);
-});
+var View = /*#__PURE__*/function () {
+  function View() {
+    _classCallCheck(this, View);
 
-exports.View = View;
-},{}],"src/img/icons.svg":[function(require,module,exports) {
-module.exports = "/icons.ae3c38d5.svg";
-},{}],"node_modules/fraction.js/fraction.js":[function(require,module,exports) {
+    _defineProperty(this, "_data", void 0);
+  }
+
+  _createClass(View, [{
+    key: "render",
+    value: function render(data) {
+      this._data = data; // data will be (model.state.recipe) cus it will be picking render method from controller file
+
+      var markup = this._generateMarkup();
+
+      this._clear();
+
+      this._parentElement.insertAdjacentHTML('afterbegin', markup);
+    }
+  }, {
+    key: "_clear",
+    value: function _clear() {
+      this._parentElement.innerHTML = '';
+    }
+  }, {
+    key: "renderSpinner",
+    value: function renderSpinner() {
+      var markup = "\n      <div class=\"spinner\">\n        <svg>\n          <use href=\"".concat(_icons.default, "#icon-loader\"></use>\n        </svg>\n      </div>\n    ");
+
+      this._clear();
+
+      this._parentElement.insertAdjacentHTML('afterbegin', markup);
+    } // This will be for succes message
+
+  }, {
+    key: "renderMessage",
+    value: function renderMessage() {
+      var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this._message;
+      var markup = "\n    <div class=\"error\">\n            <div>\n              <svg>\n                <use href=\"".concat(_icons.default, "#icon-alert-triangle\"></use>\n              </svg>\n            </div>\n            <p>").concat(message, "</p>\n          </div>\n    ");
+
+      this._clear();
+
+      this._parentElement.insertAdjacentHTML('afterbegin', markup);
+    }
+  }, {
+    key: "renderError",
+    value: function renderError() {
+      var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this._errorMessage;
+      var markup = "\n    <div class=\"message\">\n            <div>\n              <svg>\n                <use href=\"".concat(_icons.default, "#icon-smile\"></use>\n              </svg>\n            </div>\n            <p>").concat(message, "</p>\n          </div>\n    ");
+
+      this._clear();
+
+      this._parentElement.insertAdjacentHTML('afterbegin', markup);
+    }
+  }]);
+
+  return View;
+}();
+
+exports.default = View;
+},{"../../img/icons.svg":"src/img/icons.svg"}],"node_modules/fraction.js/fraction.js":[function(require,module,exports) {
 var define;
 /**
  * @license Fraction.js v4.2.0 05/03/2022
@@ -2018,7 +2078,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _view = require("./view.js");
+var _view = _interopRequireDefault(require("./view.js"));
 
 var _icons = _interopRequireDefault(require("../../img/icons.svg"));
 
@@ -2026,79 +2086,61 @@ var _fraction = require("fraction.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 // console.log(Fraction);
-var RecipeView = /*#__PURE__*/function () {
+var RecipeView = /*#__PURE__*/function (_View) {
+  _inherits(RecipeView, _View);
+
+  var _super = _createSuper(RecipeView);
+
   function RecipeView() {
+    var _this;
+
     _classCallCheck(this, RecipeView);
 
-    _defineProperty(this, "_parentElement", document.querySelector('.recipe'));
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _defineProperty(this, "_data", void 0);
+    _this = _super.call.apply(_super, [this].concat(args));
 
-    _defineProperty(this, "_errorMessage", 'We could not find the recipe. Please try again.');
+    _defineProperty(_assertThisInitialized(_this), "_parentElement", document.querySelector('.recipe'));
 
-    _defineProperty(this, "_message", '');
+    _defineProperty(_assertThisInitialized(_this), "_errorMessage", 'We could not find the recipe. Please try again.');
+
+    _defineProperty(_assertThisInitialized(_this), "_message", '');
+
+    return _this;
   }
 
   _createClass(RecipeView, [{
-    key: "render",
-    value: function render(data) {
-      this._data = data; // data will be (model.state.recipe) cus it will be picking render method from controller file
-
-      var markup = this._generateMarkup();
-
-      this._clear();
-
-      this._parentElement.insertAdjacentHTML('afterbegin', markup);
-    }
-  }, {
-    key: "_clear",
-    value: function _clear() {
-      this._parentElement.innerHTML = '';
-    }
-  }, {
-    key: "renderSpinner",
-    value: function renderSpinner() {
-      var markup = "\n      <div class=\"spinner\">\n        <svg>\n          <use href=\"".concat(_icons.default, "#icon-loader\"></use>\n        </svg>\n      </div>\n    ");
-
-      this._clear();
-
-      this._parentElement.insertAdjacentHTML('afterbegin', markup);
-    } // This will be for succes message
-
-  }, {
-    key: "renderMessage",
-    value: function renderMessage() {
-      var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this._message;
-      var markup = "\n    <div class=\"error\">\n            <div>\n              <svg>\n                <use href=\"".concat(_icons.default, "#icon-alert-triangle\"></use>\n              </svg>\n            </div>\n            <p>").concat(message, "</p>\n          </div>\n    ");
-
-      this._clear();
-
-      this._parentElement.insertAdjacentHTML('afterbegin', markup);
-    }
-  }, {
-    key: "renderError",
-    value: function renderError() {
-      var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this._errorMessage;
-      var markup = "\n    <div class=\"message\">\n            <div>\n              <svg>\n                <use href=\"".concat(_icons.default, "#icon-smile\"></use>\n              </svg>\n            </div>\n            <p>").concat(message, "</p>\n          </div>\n    ");
-
-      this._clear();
-
-      this._parentElement.insertAdjacentHTML('afterbegin', markup);
-    } // Will be using Publisher-Subscriber Pattern cus we not meant to be liatening to handler in contoller js file
-    //So here is the publisher
-
-  }, {
     key: "addHandlerRender",
-    value: function addHandlerRender(handler) {
+    value: // Will be using Publisher-Subscriber Pattern cus we not meant to be liatening to handler in contoller js file
+    //So here is the publisher
+    function addHandlerRender(handler) {
       ['hashchange', 'load'].forEach(function (ev) {
         return window.addEventListener(ev, handler);
       }); // loop over instaed of listening to events multiple times
@@ -2116,7 +2158,7 @@ var RecipeView = /*#__PURE__*/function () {
   }]);
 
   return RecipeView;
-}(); // Will create a new Recipe view object here to avoid going to open it in the controller js after export recipeView class
+}(_view.default); // Will create a new Recipe view object here to avoid going to open it in the controller js after export recipeView class
 
 
 var _default = new RecipeView(); // Instaed of exporting class recipeView
@@ -17354,6 +17396,8 @@ var _recipeView = _interopRequireDefault(require("./views/recipeView.js"));
 
 var _searchView = _interopRequireDefault(require("./views/searchView.js"));
 
+var _view = _interopRequireDefault(require("./views/view.js"));
+
 require("core-js/stable");
 
 require("regenerator-runtime/runtime");
@@ -17373,6 +17417,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 //regenerator-runtime for polifying async await
+// import { async } from 'regenerator-runtime';
 // https://forkify-api.herokuapp.com/v2
 ///////////////////////////////////////
 var controlRecipes = /*#__PURE__*/function () {
@@ -17480,7 +17525,7 @@ var init = function init() {
 };
 
 init();
-},{"./module.js":"src/js/module.js","./views/recipeView.js":"src/js/views/recipeView.js","./views/searchView.js":"src/js/views/searchView.js","core-js/stable":"node_modules/core-js/stable/index.js","regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./module.js":"src/js/module.js","./views/recipeView.js":"src/js/views/recipeView.js","./views/searchView.js":"src/js/views/searchView.js","./views/view.js":"src/js/views/view.js","core-js/stable":"node_modules/core-js/stable/index.js","regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -17508,7 +17553,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50215" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53744" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

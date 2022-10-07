@@ -1,5 +1,5 @@
+/.prettierrc
 node_modules
-.prettierrc
 dist
 .cache
 package-lock.json
