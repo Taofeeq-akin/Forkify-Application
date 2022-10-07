@@ -2190,6 +2190,11 @@ var SearchView = /*#__PURE__*/function () {
       return _classPrivateFieldGet(this, _parentEl).querySelector('.search__field').value;
     }
   }, {
+    key: "clearInput",
+    value: function clearInput() {
+      _classPrivateFieldGet(this, _parentEl).querySelector('.search__field').value = '';
+    }
+  }, {
     key: "addHandlerSearch",
     value: function addHandlerSearch(handler) {
       _classPrivateFieldGet(this, _parentEl).addEventListener('submit', function (e) {
@@ -17466,33 +17471,35 @@ var controlSearchResults = /*#__PURE__*/function () {
             _context2.prev = 0;
             query = _searchView.default.getQuery();
 
+            _searchView.default.clearInput();
+
             if (query) {
-              _context2.next = 4;
+              _context2.next = 5;
               break;
             }
 
             return _context2.abrupt("return");
 
-          case 4:
-            _context2.next = 6;
-            return model.loadSearchResults('pizza');
+          case 5:
+            _context2.next = 7;
+            return model.loadSearchResults(query);
 
-          case 6:
+          case 7:
             console.log(model.state.search.results);
-            _context2.next = 12;
+            _context2.next = 13;
             break;
 
-          case 9:
-            _context2.prev = 9;
+          case 10:
+            _context2.prev = 10;
             _context2.t0 = _context2["catch"](0);
             console.log(_context2.t0);
 
-          case 12:
+          case 13:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[0, 9]]);
+    }, _callee2, null, [[0, 10]]);
   }));
 
   return function controlSearchResults() {
