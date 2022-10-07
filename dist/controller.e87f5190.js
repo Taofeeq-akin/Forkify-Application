@@ -2285,7 +2285,7 @@ var ResultsView = /*#__PURE__*/function (_View) {
   }, {
     key: "_generateMarkupPreview",
     value: function _generateMarkupPreview(result) {
-      return "\n     <li class=\"preview\">\n        <a class=\"preview__link preview__link--active\"href=\"#".concat(result.id, "\">\n         <figure class=\"preview__fig\">\n           <img src=\"").concat(result.image, "\" alt=\"Test\" />\n         </figure>\n         <div class=\"preview__data\">\n           <h4 class=\"preview__title\">").concat(result.title, "</h4>\n           <p class=\"preview__publisher\">").concat(result.publisher, "</p>\n           <div class=\"preview__user-generated\">\n             <svg>\n               <use href=\"").concat(_icons.default, "#icon-user\"></use>\n             </svg>\n           </div>\n         </div>\n        </a>\n     </li>\n");
+      return "\n     <li class=\"preview\">\n        <a class=\"preview__link\"href=\"#".concat(result.id, "\">\n         <figure class=\"preview__fig\">\n           <img src=\"").concat(result.image, "\" alt=\"").concat(result.title, "\" />\n         </figure>\n         <div class=\"preview__data\">\n           <h4 class=\"preview__title\">").concat(result.title, "</h4>\n           <p class=\"preview__publisher\">").concat(result.publisher, "</p>\n         </div>\n        </a>\n     </li>\n");
     }
   }]);
 
