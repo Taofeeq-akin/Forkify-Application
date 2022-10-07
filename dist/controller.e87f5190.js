@@ -985,7 +985,11 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 var state = {
-  recipe: {}
+  recipe: {},
+  search: {
+    query: '',
+    results: []
+  }
 };
 exports.state = state;
 
@@ -1050,27 +1054,39 @@ var loadSearchResults = /*#__PURE__*/function () {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.prev = 0;
-            _context2.next = 3;
+            state.search.query = query;
+            _context2.next = 4;
             return (0, _helper.getJSON)("".concat(_config.API_URL, "?search=").concat(query));
 
-          case 3:
+          case 4:
             data = _context2.sent;
-            console.log(data);
-            _context2.next = 11;
+            console.log(data); // loop through the array objects to give it diff proerty name
+            // Using map cus it will retuen array
+
+            state.search.results = data.data.recipes.map(function (rec) {
+              return {
+                id: rec.id,
+                title: rec.title,
+                image: rec.image_url,
+                publisher: rec.publisher
+              };
+            });
+            console.log(state.search.results);
+            _context2.next = 14;
             break;
 
-          case 7:
-            _context2.prev = 7;
+          case 10:
+            _context2.prev = 10;
             _context2.t0 = _context2["catch"](0);
             console.log("".concat(_context2.t0, " \uD83D\uDE12\uD83D\uDE12\uD83D\uDE12"));
             throw _context2.t0;
 
-          case 11:
+          case 14:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[0, 7]]);
+    }, _callee2, null, [[0, 10]]);
   }));
 
   return function loadSearchResults(_x2) {

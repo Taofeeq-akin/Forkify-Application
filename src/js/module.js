@@ -4,6 +4,10 @@ import { getJSON } from './helper.js';
 
 export const state = {
   recipe: {},
+  search: {
+    query: '',
+    results: [],
+  },
 };
 
 export const laodRecipe = async function (id) {
@@ -33,8 +37,21 @@ export const laodRecipe = async function (id) {
 // Implementing Search Results
 export const loadSearchResults = async function (query) {
   try {
+    state.search.query = query;
     const data = await getJSON(`${API_URL}?search=${query}`);
     console.log(data);
+
+    // loop through the array objects to give it diff proerty name
+    // Using map cus it will retuen array
+    state.search.results = data.data.recipes.map(rec => {
+      return {
+        id: rec.id,
+        title: rec.title,
+        image: rec.image_url,
+        publisher: rec.publisher,
+      };
+    });
+    console.log(state.search.results);
   } catch (err) {
     console.log(`${err} 😒😒😒`);
     throw err;
