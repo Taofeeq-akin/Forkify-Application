@@ -880,12 +880,14 @@ try {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TIMEOUT_SEC = exports.API_URL = void 0;
+exports.TIMEOUT_SEC = exports.RES_PER_PAGE = exports.API_URL = void 0;
 // In this file we will be keeping reuseable variables and also responsible for kind of defining some important data about the app itself
 var API_URL = 'https://forkify-api.herokuapp.com/api/v2/recipes';
 exports.API_URL = API_URL;
 var TIMEOUT_SEC = 10;
 exports.TIMEOUT_SEC = TIMEOUT_SEC;
+var RES_PER_PAGE = 10;
+exports.RES_PER_PAGE = RES_PER_PAGE;
 },{}],"src/js/helper.js":[function(require,module,exports) {
 "use strict";
 
@@ -988,7 +990,8 @@ var state = {
   recipe: {},
   search: {
     query: '',
-    results: []
+    results: [],
+    resultPerPage: _config.RES_PER_PAGE
   }
 };
 exports.state = state;
@@ -1095,6 +1098,14 @@ var loadSearchResults = /*#__PURE__*/function () {
 }();
 
 exports.loadSearchResults = loadSearchResults;
+
+var getSearchResultsPage = function getSearchResultsPage(page) {
+  var start = (page - 1) * start.search.resultPerPage; //0
+
+  var end = page * start.search.resultPerPage; //9
+
+  return state.search.results.slice(start, end);
+};
 },{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","./config.js":"src/js/config.js","./helper.js":"src/js/helper.js"}],"src/img/icons.svg":[function(require,module,exports) {
 module.exports = "/icons.ae3c38d5.svg";
 },{}],"src/js/views/view.js":[function(require,module,exports) {
