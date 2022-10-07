@@ -1,3 +1,5 @@
+import { View } from './view.js';
+
 import icons from '../../img/icons.svg';
 import { Fraction } from 'fraction.js';
 // console.log(Fraction);

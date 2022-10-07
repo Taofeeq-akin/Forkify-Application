@@ -1095,7 +1095,26 @@ var loadSearchResults = /*#__PURE__*/function () {
 }();
 
 exports.loadSearchResults = loadSearchResults;
-},{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","./config.js":"src/js/config.js","./helper.js":"src/js/helper.js"}],"src/img/icons.svg":[function(require,module,exports) {
+},{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","./config.js":"src/js/config.js","./helper.js":"src/js/helper.js"}],"src/js/views/view.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.View = void 0;
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var View = /*#__PURE__*/_createClass(function View() {
+  _classCallCheck(this, View);
+});
+
+exports.View = View;
+},{}],"src/img/icons.svg":[function(require,module,exports) {
 module.exports = "/icons.ae3c38d5.svg";
 },{}],"node_modules/fraction.js/fraction.js":[function(require,module,exports) {
 var define;
@@ -1999,6 +2018,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _view = require("./view.js");
+
 var _icons = _interopRequireDefault(require("../../img/icons.svg"));
 
 var _fraction = require("fraction.js");
@@ -2148,7 +2169,7 @@ var _default = new RecipeView(); // Instaed of exporting class recipeView
 
 
 exports.default = _default;
-},{"../../img/icons.svg":"src/img/icons.svg","fraction.js":"node_modules/fraction.js/fraction.js"}],"src/js/views/searchView.js":[function(require,module,exports) {
+},{"./view.js":"src/js/views/view.js","../../img/icons.svg":"src/img/icons.svg","fraction.js":"node_modules/fraction.js/fraction.js"}],"src/js/views/searchView.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -17546,7 +17567,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62330" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50215" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
