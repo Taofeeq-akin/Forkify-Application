@@ -32,7 +32,7 @@ class RecipeView {
   }
 
   // This will be for succes message
-  renderMessage(message = this.#errorMessage) {
+  renderMessage(message = this.#message) {
     const markup = `
     <div class="error">
             <div>
@@ -47,7 +47,7 @@ class RecipeView {
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);
   }
 
-  renderError(message = this.#message) {
+  renderError(message = this.#errorMessage) {
     const markup = `
     <div class="message">
             <div>
