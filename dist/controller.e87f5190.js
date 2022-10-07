@@ -1070,23 +1070,23 @@ var loadSearchResults = /*#__PURE__*/function () {
                 image: rec.image_url,
                 publisher: rec.publisher
               };
-            });
-            console.log(state.search.results);
-            _context2.next = 14;
+            }); // console.log(state.search.results);
+
+            _context2.next = 13;
             break;
 
-          case 10:
-            _context2.prev = 10;
+          case 9:
+            _context2.prev = 9;
             _context2.t0 = _context2["catch"](0);
             console.log("".concat(_context2.t0, " \uD83D\uDE12\uD83D\uDE12\uD83D\uDE12"));
             throw _context2.t0;
 
-          case 14:
+          case 13:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[0, 10]]);
+    }, _callee2, null, [[0, 9]]);
   }));
 
   return function loadSearchResults(_x2) {
@@ -1095,7 +1095,6 @@ var loadSearchResults = /*#__PURE__*/function () {
 }();
 
 exports.loadSearchResults = loadSearchResults;
-loadSearchResults('pizza');
 },{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","./config.js":"src/js/config.js","./helper.js":"src/js/helper.js"}],"src/img/icons.svg":[function(require,module,exports) {
 module.exports = "/icons.ae3c38d5.svg";
 },{}],"node_modules/fraction.js/fraction.js":[function(require,module,exports) {
@@ -17397,15 +17396,48 @@ var controlRecipes = /*#__PURE__*/function () {
   return function controlRecipes() {
     return _ref.apply(this, arguments);
   };
-}(); // This wil be our Subcriber
+}();
 
+var controlSearchResults = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            _context2.next = 3;
+            return model.loadSearchResults('pizza');
+
+          case 3:
+            console.log(model.state.search.results);
+            _context2.next = 9;
+            break;
+
+          case 6:
+            _context2.prev = 6;
+            _context2.t0 = _context2["catch"](0);
+            console.log(_context2.t0);
+
+          case 9:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, null, [[0, 6]]);
+  }));
+
+  return function controlSearchResults() {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+controlSearchResults(); // This wil be our Subcriber to call controlRecipes function from view js file
 
 var init = function init() {
   _recipeView.default.addHandlerRender(controlRecipes);
 };
 
-init(); // window.addEventListener('hashchange', showRecipe);
-// window.addEventListener('load', showRecipe); // to make the window load if just open
+init();
 },{"./module.js":"src/js/module.js","./views/recipeView.js":"src/js/views/recipeView.js","core-js/stable":"node_modules/core-js/stable/index.js","regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';

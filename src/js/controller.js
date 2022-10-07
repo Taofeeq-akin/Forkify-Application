@@ -28,11 +28,18 @@ const controlRecipes = async function () {
   }
 };
 
-// This wil be our Subcriber
+const controlSearchResults = async function () {
+  try {
+    await model.loadSearchResults('pizza');
+    console.log(model.state.search.results);
+  } catch (err) {
+    console.log(err);
+  }
+};
+controlSearchResults();
+
+// This wil be our Subcriber to call controlRecipes function from view js file
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
 };
 init();
-
-// window.addEventListener('hashchange', showRecipe);
-// window.addEventListener('load', showRecipe); // to make the window load if just open

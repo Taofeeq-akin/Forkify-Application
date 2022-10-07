@@ -51,10 +51,9 @@ export const loadSearchResults = async function (query) {
         publisher: rec.publisher,
       };
     });
-    console.log(state.search.results);
+    // console.log(state.search.results);
   } catch (err) {
     console.log(`${err} 😒😒😒`);
     throw err;
   }
 };
-loadSearchResults('pizza');
