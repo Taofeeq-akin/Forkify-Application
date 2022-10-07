@@ -2082,7 +2082,7 @@ var _view = _interopRequireDefault(require("./view.js"));
 
 var _icons = _interopRequireDefault(require("../../img/icons.svg"));
 
-var _fraction = require("fraction.js");
+var _fraction = _interopRequireDefault(require("fraction.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2153,7 +2153,7 @@ var RecipeView = /*#__PURE__*/function (_View) {
   }, {
     key: "_generateMarkupIngredient",
     value: function _generateMarkupIngredient(ing) {
-      return "\n    <li class=\"recipe__ingredient\">\n      <svg class=\"recipe__icon\">\n        <use href=\"".concat(_icons.default, "#icon-check\"></use>\n      </svg>\n      <div class=\"recipe__quantity\">").concat(ing.quantity ? new _fraction.Fraction(ing.quantity).toFraction(true) : '', "</div>\n      <div class=\"recipe__description\">\n        <span class=\"recipe__unit\">").concat(ing.unit, "</span>\n        ").concat(ing.description, "\n      </div>\n    </li>\n  ");
+      return "\n    <li class=\"recipe__ingredient\">\n      <svg class=\"recipe__icon\">\n        <use href=\"".concat(_icons.default, "#icon-check\"></use>\n      </svg>\n      <div class=\"recipe__quantity\">").concat(ing.quantity ? new _fraction.default(ing.quantity).toFraction(true) : '', "</div>\n      <div class=\"recipe__description\">\n        <span class=\"recipe__unit\">").concat(ing.unit, "</span>\n        ").concat(ing.description, "\n      </div>\n    </li>\n  ");
     }
   }]);
 
@@ -2217,7 +2217,70 @@ var SearchView = /*#__PURE__*/function () {
 var _default = new SearchView();
 
 exports.default = _default;
-},{}],"node_modules/core-js/internals/global.js":[function(require,module,exports) {
+},{}],"src/js/views/resultsView.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _view = _interopRequireDefault(require("./view"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var ResultsView = /*#__PURE__*/function (_View) {
+  _inherits(ResultsView, _View);
+
+  var _super = _createSuper(ResultsView);
+
+  function ResultsView() {
+    var _this;
+
+    _classCallCheck(this, ResultsView);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "_parentElement", document.querySelector('.results'));
+
+    return _this;
+  }
+
+  return _createClass(ResultsView);
+}(_view.default);
+
+var _default = new ResultsView();
+
+exports.default = _default;
+},{"./view":"src/js/views/view.js"}],"node_modules/core-js/internals/global.js":[function(require,module,exports) {
 var global = arguments[3];
 var check = function (it) {
   return it && it.Math == Math && it;
@@ -17396,7 +17459,7 @@ var _recipeView = _interopRequireDefault(require("./views/recipeView.js"));
 
 var _searchView = _interopRequireDefault(require("./views/searchView.js"));
 
-var _view = _interopRequireDefault(require("./views/view.js"));
+var _resultsView = _interopRequireDefault(require("./views/resultsView.js"));
 
 require("core-js/stable");
 
@@ -17428,42 +17491,45 @@ var controlRecipes = /*#__PURE__*/function () {
         switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
+
+            _resultsView.default.renderSpinner();
+
             id = window.location.hash.slice(1); // console.log(id);
 
             if (id) {
-              _context.next = 4;
+              _context.next = 5;
               break;
             }
 
             return _context.abrupt("return");
 
-          case 4:
+          case 5:
             _recipeView.default.renderSpinner(); // 1) Loading Recipe
 
 
-            _context.next = 7;
+            _context.next = 8;
             return model.laodRecipe(id);
 
-          case 7:
+          case 8:
             // will return a peomise since its an async function so we have to await it
             // 2) Rendering Recipe
             _recipeView.default.render(model.state.recipe);
 
-            _context.next = 13;
+            _context.next = 14;
             break;
 
-          case 10:
-            _context.prev = 10;
+          case 11:
+            _context.prev = 11;
             _context.t0 = _context["catch"](0);
 
             _recipeView.default.renderError();
 
-          case 13:
+          case 14:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 10]]);
+    }, _callee, null, [[0, 11]]);
   }));
 
   return function controlRecipes() {
@@ -17525,7 +17591,7 @@ var init = function init() {
 };
 
 init();
-},{"./module.js":"src/js/module.js","./views/recipeView.js":"src/js/views/recipeView.js","./views/searchView.js":"src/js/views/searchView.js","./views/view.js":"src/js/views/view.js","core-js/stable":"node_modules/core-js/stable/index.js","regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./module.js":"src/js/module.js","./views/recipeView.js":"src/js/views/recipeView.js","./views/searchView.js":"src/js/views/searchView.js","./views/resultsView.js":"src/js/views/resultsView.js","core-js/stable":"node_modules/core-js/stable/index.js","regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;

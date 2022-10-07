@@ -1,7 +1,7 @@
 import * as model from './module.js';
 import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
-import View from './views/view.js';
+import resultsView from './views/resultsView.js';
 
 import 'core-js/stable'; // install for pollying all
 import 'regenerator-runtime/runtime'; //regenerator-runtime for polifying async await
@@ -13,6 +13,8 @@ import 'regenerator-runtime/runtime'; //regenerator-runtime for polifying async 
 
 const controlRecipes = async function () {
   try {
+    resultsView.renderSpinner();
+
     const id = window.location.hash.slice(1);
     // console.log(id);
 
