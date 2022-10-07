@@ -2227,6 +2227,8 @@ exports.default = void 0;
 
 var _view = _interopRequireDefault(require("./view"));
 
+var _icons = _interopRequireDefault(require("../../img/icons.svg"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -2282,8 +2284,8 @@ var ResultsView = /*#__PURE__*/function (_View) {
     }
   }, {
     key: "_generateMarkupPreview",
-    value: function _generateMarkupPreview() {
-      return "\n     <li class=\"preview\">\n        <a class=\"preview__link preview__link--active\"href=\"#23456\">\n         <figure class=\"preview__fig\">\n           <img src=\"src/img/test-1.jpg\" alt=\"Test\" />\n         </figure>\n         <div class=\"preview__data\">\n           <h4 class=\"preview__title\">Pasta with Tomato Cream ...</h4>\n           <p class=\"preview__publisher\">The Pioneer Woman</p>\n           <div class=\"preview__user-generated\">\n             <svg>\n               <use href=\"src/img/icons.svg#icon-user\"></use>\n             </svg>\n           </div>\n         </div>\n        </a>\n     </li>\n";
+    value: function _generateMarkupPreview(result) {
+      return "\n     <li class=\"preview\">\n        <a class=\"preview__link preview__link--active\"href=\"#".concat(result.id, "\">\n         <figure class=\"preview__fig\">\n           <img src=\"").concat(result.image, "\" alt=\"Test\" />\n         </figure>\n         <div class=\"preview__data\">\n           <h4 class=\"preview__title\">").concat(result.title, "</h4>\n           <p class=\"preview__publisher\">").concat(result.publisher, "</p>\n           <div class=\"preview__user-generated\">\n             <svg>\n               <use href=\"").concat(_icons.default, "#icon-user\"></use>\n             </svg>\n           </div>\n         </div>\n        </a>\n     </li>\n");
     }
   }]);
 
@@ -2293,7 +2295,7 @@ var ResultsView = /*#__PURE__*/function (_View) {
 var _default = new ResultsView();
 
 exports.default = _default;
-},{"./view":"src/js/views/view.js"}],"node_modules/core-js/internals/global.js":[function(require,module,exports) {
+},{"./view":"src/js/views/view.js","../../img/icons.svg":"src/img/icons.svg"}],"node_modules/core-js/internals/global.js":[function(require,module,exports) {
 var global = arguments[3];
 var check = function (it) {
   return it && it.Math == Math && it;
