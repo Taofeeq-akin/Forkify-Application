@@ -2231,11 +2231,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -2274,7 +2274,15 @@ var ResultsView = /*#__PURE__*/function (_View) {
     return _this;
   }
 
-  return _createClass(ResultsView);
+  _createClass(ResultsView, [{
+    key: "_generateMarkup",
+    value: function _generateMarkup() {
+      console.log(this._data);
+      return "\n     <li class=\"preview\">\n        <a class=\"preview__link preview__link--active\"href=\"#23456\">\n         <figure class=\"preview__fig\">\n           <img src=\"src/img/test-1.jpg\" alt=\"Test\" />\n         </figure>\n         <div class=\"preview__data\">\n           <h4 class=\"preview__title\">Pasta with Tomato Cream ...</h4>\n           <p class=\"preview__publisher\">The Pioneer Woman</p>\n           <div class=\"preview__user-generated\">\n             <svg>\n               <use href=\"src/img/icons.svg#icon-user\"></use>\n             </svg>\n           </div>\n         </div>\n        </a>\n     </li>\n";
+    }
+  }]);
+
+  return ResultsView;
 }(_view.default);
 
 var _default = new ResultsView();
@@ -17491,45 +17499,42 @@ var controlRecipes = /*#__PURE__*/function () {
         switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
-
-            _resultsView.default.renderSpinner();
-
             id = window.location.hash.slice(1); // console.log(id);
 
             if (id) {
-              _context.next = 5;
+              _context.next = 4;
               break;
             }
 
             return _context.abrupt("return");
 
-          case 5:
+          case 4:
             _recipeView.default.renderSpinner(); // 1) Loading Recipe
 
 
-            _context.next = 8;
+            _context.next = 7;
             return model.laodRecipe(id);
 
-          case 8:
+          case 7:
             // will return a peomise since its an async function so we have to await it
             // 2) Rendering Recipe
             _recipeView.default.render(model.state.recipe);
 
-            _context.next = 14;
+            _context.next = 13;
             break;
 
-          case 11:
-            _context.prev = 11;
+          case 10:
+            _context.prev = 10;
             _context.t0 = _context["catch"](0);
 
             _recipeView.default.renderError();
 
-          case 14:
+          case 13:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 11]]);
+    }, _callee, null, [[0, 10]]);
   }));
 
   return function controlRecipes() {
@@ -17545,37 +17550,43 @@ var controlSearchResults = /*#__PURE__*/function () {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.prev = 0;
-            // Get search query
+
+            _resultsView.default.renderSpinner(); // Get search query
+
+
             query = _searchView.default.getQuery();
 
             if (query) {
-              _context2.next = 4;
+              _context2.next = 5;
               break;
             }
 
             return _context2.abrupt("return");
 
-          case 4:
-            _context2.next = 6;
+          case 5:
+            _context2.next = 7;
             return model.loadSearchResults(query);
 
-          case 6:
+          case 7:
             // 3) Render Results
             console.log(model.state.search.results);
-            _context2.next = 12;
+
+            _resultsView.default.render(model.state.search.results);
+
+            _context2.next = 14;
             break;
 
-          case 9:
-            _context2.prev = 9;
+          case 11:
+            _context2.prev = 11;
             _context2.t0 = _context2["catch"](0);
             console.log(_context2.t0);
 
-          case 12:
+          case 14:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[0, 9]]);
+    }, _callee2, null, [[0, 11]]);
   }));
 
   return function controlSearchResults() {
