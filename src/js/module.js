@@ -13,7 +13,7 @@ export const state = {
 export const laodRecipe = async function (id) {
   try {
     const data = await getJSON(`${API_URL}/${id}`);
-    console.log(data);
+    // console.log(data);
 
     const { recipe } = data.data; // since we have recipe on both side we can just distruct the variable
     state.recipe = {
@@ -26,7 +26,7 @@ export const laodRecipe = async function (id) {
       image: recipe.image_url,
       cookingTime: recipe.cooking_time,
     };
-    console.log(state.recipe);
+    // console.log(state.recipe);
   } catch (err) {
     // Temp error handling
     console.log(`${err} 😒😒😒`);

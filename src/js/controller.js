@@ -1,10 +1,9 @@
 import * as model from './module.js';
 import recipeView from './views/recipeView.js';
+import searchView from './views/searchView.js';
 
 import 'core-js/stable'; // install for pollying all
 import 'regenerator-runtime/runtime'; //regenerator-runtime for polifying async await
-
-const recipeContainer = document.querySelector('.recipe');
 
 // https://forkify-api.herokuapp.com/v2
 
@@ -30,16 +29,19 @@ const controlRecipes = async function () {
 
 const controlSearchResults = async function () {
   try {
+    const query = searchView.getQuery();
+    if (!query) return;
+
     await model.loadSearchResults('pizza');
     console.log(model.state.search.results);
   } catch (err) {
     console.log(err);
   }
 };
-controlSearchResults();
 
 // This wil be our Subcriber to call controlRecipes function from view js file
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
+  searchView.addHandlerSearch(controlSearchResults);
 };
 init();
