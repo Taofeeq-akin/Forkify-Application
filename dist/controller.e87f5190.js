@@ -17498,6 +17498,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 // import { async } from 'regenerator-runtime';
 // https://forkify-api.herokuapp.com/v2
 ///////////////////////////////////////
+if (module.hot) {
+  module.hot.accept();
+}
+
 var controlRecipes = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
     var id;

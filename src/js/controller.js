@@ -11,6 +11,10 @@ import 'regenerator-runtime/runtime'; //regenerator-runtime for polifying async 
 
 ///////////////////////////////////////
 
+if (module.hot) {
+  module.hot.accept();
+}
+
 const controlRecipes = async function () {
   try {
     const id = window.location.hash.slice(1);
