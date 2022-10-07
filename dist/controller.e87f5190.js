@@ -1127,6 +1127,7 @@ var View = /*#__PURE__*/function () {
   _createClass(View, [{
     key: "render",
     value: function render(data) {
+      if (!data || Array.isArray(data) && data.length === 0) return this.renderError();
       this._data = data; // data will be (model.state.recipe) cus it will be picking render method from controller file
 
       var markup = this._generateMarkup();
@@ -1164,7 +1165,7 @@ var View = /*#__PURE__*/function () {
     key: "renderError",
     value: function renderError() {
       var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this._errorMessage;
-      var markup = "\n    <div class=\"message\">\n            <div>\n              <svg>\n                <use href=\"".concat(_icons.default, "#icon-smile\"></use>\n              </svg>\n            </div>\n            <p>").concat(message, "</p>\n          </div>\n    ");
+      var markup = "\n    <div class=\"message\">\n            <div>\n              <svg>\n                <use href=\"".concat(_icons.default, "#icon-alert-triangle\"></use>\n              </svg>\n            </div>\n            <p>").concat(message, "</p>\n          </div>\n    ");
 
       this._clear();
 
@@ -2272,6 +2273,10 @@ var ResultsView = /*#__PURE__*/function (_View) {
     _this = _super.call.apply(_super, [this].concat(args));
 
     _defineProperty(_assertThisInitialized(_this), "_parentElement", document.querySelector('.results'));
+
+    _defineProperty(_assertThisInitialized(_this), "_errorMessage", 'No recipes found for your search! try again :)');
+
+    _defineProperty(_assertThisInitialized(_this), "_message", '');
 
     return _this;
   }

@@ -4,6 +4,9 @@ export default class View {
   _data;
 
   render(data) {
+    if (!data || (Array.isArray(data) && data.length === 0))
+      return this.renderError();
+
     this._data = data; // data will be (model.state.recipe) cus it will be picking render method from controller file
     const markup = this._generateMarkup();
     this._clear();
@@ -47,7 +50,7 @@ export default class View {
     <div class="message">
             <div>
               <svg>
-                <use href="${icons}#icon-smile"></use>
+                <use href="${icons}#icon-alert-triangle"></use>
               </svg>
             </div>
             <p>${message}</p>
