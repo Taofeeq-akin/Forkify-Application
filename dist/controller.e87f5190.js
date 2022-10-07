@@ -968,7 +968,7 @@ exports.getJSON = getJSON;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.state = exports.laodRecipe = void 0;
+exports.state = exports.loadSearchResults = exports.laodRecipe = void 0;
 
 var _regeneratorRuntime2 = require("regenerator-runtime");
 
@@ -1016,15 +1016,17 @@ var laodRecipe = /*#__PURE__*/function () {
               cookingTime: recipe.cooking_time
             };
             console.log(state.recipe);
-            _context.next = 13;
+            _context.next = 14;
             break;
 
           case 10:
             _context.prev = 10;
             _context.t0 = _context["catch"](0);
+            // Temp error handling
+            console.log("".concat(_context.t0, " \uD83D\uDE12\uD83D\uDE12\uD83D\uDE12"));
             throw _context.t0;
 
-          case 13:
+          case 14:
           case "end":
             return _context.stop();
         }
@@ -1035,9 +1037,49 @@ var laodRecipe = /*#__PURE__*/function () {
   return function laodRecipe(_x) {
     return _ref.apply(this, arguments);
   };
-}();
+}(); // Implementing Search Results
+
 
 exports.laodRecipe = laodRecipe;
+
+var loadSearchResults = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(query) {
+    var data;
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            _context2.next = 3;
+            return (0, _helper.getJSON)("".concat(_config.API_URL, "?search=").concat(query));
+
+          case 3:
+            data = _context2.sent;
+            console.log(data);
+            _context2.next = 11;
+            break;
+
+          case 7:
+            _context2.prev = 7;
+            _context2.t0 = _context2["catch"](0);
+            console.log("".concat(_context2.t0, " \uD83D\uDE12\uD83D\uDE12\uD83D\uDE12"));
+            throw _context2.t0;
+
+          case 11:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, null, [[0, 7]]);
+  }));
+
+  return function loadSearchResults(_x2) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+exports.loadSearchResults = loadSearchResults;
+loadSearchResults('pizza');
 },{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","./config.js":"src/js/config.js","./helper.js":"src/js/helper.js"}],"src/img/icons.svg":[function(require,module,exports) {
 module.exports = "/icons.ae3c38d5.svg";
 },{}],"node_modules/fraction.js/fraction.js":[function(require,module,exports) {

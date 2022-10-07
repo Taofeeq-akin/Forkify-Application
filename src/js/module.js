@@ -25,7 +25,19 @@ export const laodRecipe = async function (id) {
     console.log(state.recipe);
   } catch (err) {
     // Temp error handling
-    // console.log(`${err} 😒😒😒`);
+    console.log(`${err} 😒😒😒`);
     throw err;
   }
 };
+
+// Implementing Search Results
+export const loadSearchResults = async function (query) {
+  try {
+    const data = await getJSON(`${API_URL}?search=${query}`);
+    console.log(data);
+  } catch (err) {
+    console.log(`${err} 😒😒😒`);
+    throw err;
+  }
+};
+loadSearchResults('pizza');
