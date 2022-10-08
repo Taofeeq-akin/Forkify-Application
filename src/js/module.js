@@ -59,9 +59,9 @@ export const loadSearchResults = async function (query) {
   }
 };
 
-const getSearchResultsPage = function (page) {
-  const start = (page - 1) * start.search.resultPerPage; //0
-  const end = page * start.search.resultPerPage; //9
+export const getSearchResultsPage = function (page) {
+  const start = (page - 1) * state.search.resultPerPage; //0
+  const end = page * state.search.resultPerPage; //9
 
   return state.search.results.slice(start, end);
 };

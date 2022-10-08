@@ -970,7 +970,7 @@ exports.getJSON = getJSON;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.state = exports.loadSearchResults = exports.laodRecipe = void 0;
+exports.state = exports.loadSearchResults = exports.laodRecipe = exports.getSearchResultsPage = void 0;
 
 var _regeneratorRuntime2 = require("regenerator-runtime");
 
@@ -1100,12 +1100,14 @@ var loadSearchResults = /*#__PURE__*/function () {
 exports.loadSearchResults = loadSearchResults;
 
 var getSearchResultsPage = function getSearchResultsPage(page) {
-  var start = (page - 1) * start.search.resultPerPage; //0
+  var start = (page - 1) * state.search.resultPerPage; //0
 
-  var end = page * start.search.resultPerPage; //9
+  var end = page * state.search.resultPerPage; //9
 
   return state.search.results.slice(start, end);
 };
+
+exports.getSearchResultsPage = getSearchResultsPage;
 },{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","./config.js":"src/js/config.js","./helper.js":"src/js/helper.js"}],"src/img/icons.svg":[function(require,module,exports) {
 module.exports = "/icons.ae3c38d5.svg";
 },{}],"src/js/views/view.js":[function(require,module,exports) {
@@ -17596,9 +17598,9 @@ var controlSearchResults = /*#__PURE__*/function () {
 
           case 7:
             // 3) Render Results
-            console.log(model.state.search.results);
+            console.log(model.getSearchResultsPage(1)); // resultsView.render(model.state.search.results);
 
-            _resultsView.default.render(model.state.search.results);
+            _resultsView.default.render(model.getSearchResultsPage(1));
 
             _context2.next = 14;
             break;
@@ -17657,7 +17659,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53744" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57592" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
