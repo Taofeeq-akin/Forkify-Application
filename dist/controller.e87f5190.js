@@ -2378,13 +2378,25 @@ var PaginationView = /*#__PURE__*/function (_View) {
   _createClass(PaginationView, [{
     key: "_generateMarkup",
     value: function _generateMarkup() {
+      var curPage = this._data.page;
       var numPages = Math.ceil(this._data.results.length / this._data.resultPerPage);
       console.log(numPages); // Page 1, and other pages
-      // page 1, no other pages
-      // last page
-      //other page
 
-      return "\n    \n    ";
+      if (curPage === 1 && numPages > 1) {
+        return "\n      <button class=\"btn--inline pagination__btn--next\">\n        <span>Page ".concat(curPage + 1, "</span>\n        <svg class=\"search__icon\">\n            <use href=\"").concat(_icons.default, "#icon-arrow-right\"></use>\n        </svg>\n        </button\n      ");
+      } // last page
+
+
+      if (curPage === numPages && numPages > 1) {
+        return "\n      <button class=\"btn--inline pagination__btn--prev\">\n        <svg class=\"search__icon\">\n            <use href=\"".concat(_icons.default, "#icon-arrow-left\"></use>\n        </svg>\n        <span>Page ").concat(curPage - 1, "</span>\n        </button>\n      ");
+      } //other page
+
+
+      if (curPage < numPages) {
+        return "\n      <button class=\"btn--inline pagination__btn--prev\">\n        <svg class=\"search__icon\">\n            <use href=\"".concat(_icons.default, "#icon-arrow-left\"></use>\n        </svg>\n        <span>Page ").concat(curPage - 1, "</span>\n      </button>\n      <button class=\"btn--inline pagination__btn--next\">\n        <span>Page ").concat(curPage + 1, "</span>\n        <svg class=\"search__icon\">\n            <use href=\"").concat(_icons.default, "#icon-arrow-right\"></use>\n        </svg>\n      </button>\n      ");
+      } // page 1, no other pages
+      // return `only 1 page `;
+
     }
   }]);
 
@@ -17599,10 +17611,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 // import { async } from 'regenerator-runtime';
 // https://forkify-api.herokuapp.com/v2
 ///////////////////////////////////////
-if (module.hot) {
-  module.hot.accept();
-}
-
+// if (module.hot) {
+//   module.hot.accept();
+// }
 var controlRecipes = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
     var id;
@@ -17682,7 +17693,7 @@ var controlSearchResults = /*#__PURE__*/function () {
           case 7:
             // 3) Render Results
             // resultsView.render(model.state.search.results);
-            _resultsView.default.render(model.getSearchResultsPage()); // 4) Render initial pagination button
+            _resultsView.default.render(model.getSearchResultsPage(4)); // 4) Render initial pagination button
 
 
             _paginationView.default.render(model.state.search);

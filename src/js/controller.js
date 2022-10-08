@@ -12,9 +12,9 @@ import 'regenerator-runtime/runtime'; //regenerator-runtime for polifying async 
 
 ///////////////////////////////////////
 
-if (module.hot) {
-  module.hot.accept();
-}
+// if (module.hot) {
+//   module.hot.accept();
+// }
 
 const controlRecipes = async function () {
   try {
@@ -47,7 +47,7 @@ const controlSearchResults = async function () {
 
     // 3) Render Results
     // resultsView.render(model.state.search.results);
-    resultsView.render(model.getSearchResultsPage());
+    resultsView.render(model.getSearchResultsPage(4));
 
     // 4) Render initial pagination button
     paginationView.render(model.state.search);
