@@ -2380,20 +2380,29 @@ var PaginationView = /*#__PURE__*/function (_View) {
     value: function _generateMarkup() {
       var curPage = this._data.page;
       var numPages = Math.ceil(this._data.results.length / this._data.resultPerPage);
-      console.log(numPages); // Page 1, and other pages
+      console.log(numPages);
+
+      var generateMarkUpBtnNext = function generateMarkUpBtnNext() {
+        return "\n      <button class=\"btn--inline pagination__btn--next\">\n        <span>Page ".concat(curPage + 1, "</span>\n        <svg class=\"search__icon\">\n            <use href=\"").concat(_icons.default, "#icon-arrow-right\"></use>\n        </svg>\n        </button\n      ");
+      };
+
+      var generateMarkUpBtnPrev = function generateMarkUpBtnPrev() {
+        return "\n        <button class=\"btn--inline pagination__btn--prev\">\n        <svg class=\"search__icon\">\n            <use href=\"".concat(_icons.default, "#icon-arrow-left\"></use>\n        </svg>\n        <span>Page ").concat(curPage - 1, "</span>\n        </button>\n        ");
+      }; // Page 1, and other pages
+
 
       if (curPage === 1 && numPages > 1) {
-        return "\n      <button class=\"btn--inline pagination__btn--next\">\n        <span>Page ".concat(curPage + 1, "</span>\n        <svg class=\"search__icon\">\n            <use href=\"").concat(_icons.default, "#icon-arrow-right\"></use>\n        </svg>\n        </button\n      ");
+        return generateMarkUpBtnNext();
       } // last page
 
 
       if (curPage === numPages && numPages > 1) {
-        return "\n      <button class=\"btn--inline pagination__btn--prev\">\n        <svg class=\"search__icon\">\n            <use href=\"".concat(_icons.default, "#icon-arrow-left\"></use>\n        </svg>\n        <span>Page ").concat(curPage - 1, "</span>\n        </button>\n      ");
+        return generateMarkUpBtnPrev();
       } //other page
 
 
       if (curPage < numPages) {
-        return "\n      <button class=\"btn--inline pagination__btn--prev\">\n        <svg class=\"search__icon\">\n            <use href=\"".concat(_icons.default, "#icon-arrow-left\"></use>\n        </svg>\n        <span>Page ").concat(curPage - 1, "</span>\n      </button>\n      <button class=\"btn--inline pagination__btn--next\">\n        <span>Page ").concat(curPage + 1, "</span>\n        <svg class=\"search__icon\">\n            <use href=\"").concat(_icons.default, "#icon-arrow-right\"></use>\n        </svg>\n      </button>\n      ");
+        return "".concat(generateMarkUpBtnPrev(), " ").concat(generateMarkUpBtnNext());
       } // page 1, no other pages
       // return `only 1 page `;
 
@@ -17755,7 +17764,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58364" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60775" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -11,8 +11,7 @@ class PaginationView extends View {
     );
     console.log(numPages);
 
-    // Page 1, and other pages
-    if (curPage === 1 && numPages > 1) {
+    const generateMarkUpBtnNext = () => {
       return `
       <button class="btn--inline pagination__btn--next">
         <span>Page ${curPage + 1}</span>
@@ -21,36 +20,32 @@ class PaginationView extends View {
         </svg>
         </button
       `;
-    }
+    };
 
-    // last page
-    if (curPage === numPages && numPages > 1) {
+    const generateMarkUpBtnPrev = () => {
       return `
-      <button class="btn--inline pagination__btn--prev">
+        <button class="btn--inline pagination__btn--prev">
         <svg class="search__icon">
             <use href="${icons}#icon-arrow-left"></use>
         </svg>
         <span>Page ${curPage - 1}</span>
         </button>
-      `;
+        `;
+    };
+
+    // Page 1, and other pages
+    if (curPage === 1 && numPages > 1) {
+      return generateMarkUpBtnNext();
+    }
+
+    // last page
+    if (curPage === numPages && numPages > 1) {
+      return generateMarkUpBtnPrev();
     }
 
     //other page
     if (curPage < numPages) {
-      return `
-      <button class="btn--inline pagination__btn--prev">
-        <svg class="search__icon">
-            <use href="${icons}#icon-arrow-left"></use>
-        </svg>
-        <span>Page ${curPage - 1}</span>
-      </button>
-      <button class="btn--inline pagination__btn--next">
-        <span>Page ${curPage + 1}</span>
-        <svg class="search__icon">
-            <use href="${icons}#icon-arrow-right"></use>
-        </svg>
-      </button>
-      `;
+      return `${generateMarkUpBtnPrev()} ${generateMarkUpBtnNext()}`;
     }
 
     // page 1, no other pages
