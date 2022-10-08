@@ -2376,6 +2376,16 @@ var PaginationView = /*#__PURE__*/function (_View) {
   }
 
   _createClass(PaginationView, [{
+    key: "addHandlerClick",
+    value: function addHandlerClick(handler) {
+      this._parentElement.addEventListener('click', function (e) {
+        var btn = e.target.closest('.btn--inline');
+        console.log(btn);
+      });
+
+      handler();
+    }
+  }, {
     key: "_generateMarkup",
     value: function _generateMarkup() {
       var curPage = this._data.page;
@@ -17726,13 +17736,19 @@ var controlSearchResults = /*#__PURE__*/function () {
   return function controlSearchResults() {
     return _ref2.apply(this, arguments);
   };
-}(); // This wil be our Subcriber to call controlRecipes function from view js file
+}();
+
+var controlPagination = function controlPagination() {
+  console.log('Pag controller');
+}; // This wil be our Subcriber to call controlRecipes function from view js file
 
 
 var init = function init() {
   _recipeView.default.addHandlerRender(controlRecipes);
 
   _searchView.default.addHandlerSearch(controlSearchResults);
+
+  _paginationView.default.addHandlerClick(controlPagination);
 };
 
 init();
