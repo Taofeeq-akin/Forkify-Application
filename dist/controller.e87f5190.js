@@ -2378,7 +2378,7 @@ var PaginationView = /*#__PURE__*/function (_View) {
   _createClass(PaginationView, [{
     key: "_generateMarkup",
     value: function _generateMarkup() {
-      var numPages = this._data.results.length / this._data.resultPerPage;
+      var numPages = Math.ceil(this._data.results.length / this._data.resultPerPage);
       console.log(numPages); // Page 1, and other pages
       // page 1, no other pages
       // last page
