@@ -47,7 +47,7 @@ const controlSearchResults = async function () {
 
     // 3) Render Results
     // resultsView.render(model.state.search.results);
-    resultsView.render(model.getSearchResultsPage(4));
+    resultsView.render(model.getSearchResultsPage());
 
     // 4) Render initial pagination button
     paginationView.render(model.state.search);
@@ -56,8 +56,12 @@ const controlSearchResults = async function () {
   }
 };
 
-const controlPagination = function () {
-  console.log('Pag controller');
+const controlPagination = function (goToPage) {
+  // 3) Render NEW Results
+  resultsView.render(model.getSearchResultsPage(goToPage));
+
+  // 4) Render NEW pagination button
+  paginationView.render(model.state.search);
 };
 
 // This wil be our Subcriber to call controlRecipes function from view js file

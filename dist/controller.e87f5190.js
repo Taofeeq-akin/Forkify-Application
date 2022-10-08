@@ -2380,24 +2380,25 @@ var PaginationView = /*#__PURE__*/function (_View) {
     value: function addHandlerClick(handler) {
       this._parentElement.addEventListener('click', function (e) {
         var btn = e.target.closest('.btn--inline');
-        console.log(btn);
-      });
+        if (!btn) return;
+        var goToPage = +btn.dataset.goto; // for the btn to know the page to goTo
+        //   console.log(goToPage);
 
-      handler();
+        handler(goToPage);
+      });
     }
   }, {
     key: "_generateMarkup",
     value: function _generateMarkup() {
       var curPage = this._data.page;
       var numPages = Math.ceil(this._data.results.length / this._data.resultPerPage);
-      console.log(numPages);
 
       var generateMarkUpBtnNext = function generateMarkUpBtnNext() {
-        return "\n      <button class=\"btn--inline pagination__btn--next\">\n        <span>Page ".concat(curPage + 1, "</span>\n        <svg class=\"search__icon\">\n            <use href=\"").concat(_icons.default, "#icon-arrow-right\"></use>\n        </svg>\n        </button\n      ");
+        return "\n      <button data-goto=\"".concat(curPage + 1, "\" class=\"btn--inline pagination__btn--next\">\n        <span>Page ").concat(curPage + 1, "</span>\n        <svg class=\"search__icon\">\n            <use href=\"").concat(_icons.default, "#icon-arrow-right\"></use>\n        </svg>\n        </button\n      ");
       };
 
       var generateMarkUpBtnPrev = function generateMarkUpBtnPrev() {
-        return "\n        <button class=\"btn--inline pagination__btn--prev\">\n        <svg class=\"search__icon\">\n            <use href=\"".concat(_icons.default, "#icon-arrow-left\"></use>\n        </svg>\n        <span>Page ").concat(curPage - 1, "</span>\n        </button>\n        ");
+        return "\n        <button data-goto=\"".concat(curPage - 1, "\" class=\"btn--inline pagination__btn--prev\">\n        <svg class=\"search__icon\">\n            <use href=\"").concat(_icons.default, "#icon-arrow-left\"></use>\n        </svg>\n        <span>Page ").concat(curPage - 1, "</span>\n        </button>\n        ");
       }; // Page 1, and other pages
 
 
@@ -17712,7 +17713,7 @@ var controlSearchResults = /*#__PURE__*/function () {
           case 7:
             // 3) Render Results
             // resultsView.render(model.state.search.results);
-            _resultsView.default.render(model.getSearchResultsPage(4)); // 4) Render initial pagination button
+            _resultsView.default.render(model.getSearchResultsPage()); // 4) Render initial pagination button
 
 
             _paginationView.default.render(model.state.search);
@@ -17738,8 +17739,12 @@ var controlSearchResults = /*#__PURE__*/function () {
   };
 }();
 
-var controlPagination = function controlPagination() {
-  console.log('Pag controller');
+var controlPagination = function controlPagination(goToPage) {
+  // 3) Render NEW Results
+  _resultsView.default.render(model.getSearchResultsPage(goToPage)); // 4) Render NEW pagination button
+
+
+  _paginationView.default.render(model.state.search);
 }; // This wil be our Subcriber to call controlRecipes function from view js file
 
 
