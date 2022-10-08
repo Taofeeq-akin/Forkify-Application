@@ -991,6 +991,7 @@ var state = {
   search: {
     query: '',
     results: [],
+    page: 1,
     resultPerPage: _config.RES_PER_PAGE
   }
 };
@@ -1099,7 +1100,9 @@ var loadSearchResults = /*#__PURE__*/function () {
 
 exports.loadSearchResults = loadSearchResults;
 
-var getSearchResultsPage = function getSearchResultsPage(page) {
+var getSearchResultsPage = function getSearchResultsPage() {
+  var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : state.search.page;
+  state.search.page = page;
   var start = (page - 1) * state.search.resultPerPage; //0
 
   var end = page * state.search.resultPerPage; //9
@@ -17598,24 +17601,23 @@ var controlSearchResults = /*#__PURE__*/function () {
 
           case 7:
             // 3) Render Results
-            console.log(model.getSearchResultsPage(1)); // resultsView.render(model.state.search.results);
+            // resultsView.render(model.state.search.results);
+            _resultsView.default.render(model.getSearchResultsPage());
 
-            _resultsView.default.render(model.getSearchResultsPage(1));
-
-            _context2.next = 14;
+            _context2.next = 13;
             break;
 
-          case 11:
-            _context2.prev = 11;
+          case 10:
+            _context2.prev = 10;
             _context2.t0 = _context2["catch"](0);
             console.log(_context2.t0);
 
-          case 14:
+          case 13:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[0, 11]]);
+    }, _callee2, null, [[0, 10]]);
   }));
 
   return function controlSearchResults() {
