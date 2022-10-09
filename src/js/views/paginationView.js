@@ -12,7 +12,7 @@ class PaginationView extends View {
       const goToPage = +btn.dataset.goto; // for the btn to know the page to goTo
       //   console.log(goToPage);
 
-      handler(goToPage);
+      handler(goToPage); // This will call controlPagination from controller js file
     });
   }
 
@@ -64,7 +64,7 @@ class PaginationView extends View {
     }
 
     // page 1, no other pages
-    // return `only 1 page `;
+    return '';
   }
 }
 

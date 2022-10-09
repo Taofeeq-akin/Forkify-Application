@@ -970,7 +970,7 @@ exports.getJSON = getJSON;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.state = exports.loadSearchResults = exports.laodRecipe = exports.getSearchResultsPage = void 0;
+exports.updatingServings = exports.state = exports.loadSearchResults = exports.laodRecipe = exports.getSearchResultsPage = void 0;
 
 var _regeneratorRuntime2 = require("regenerator-runtime");
 
@@ -1022,24 +1022,24 @@ var laodRecipe = /*#__PURE__*/function () {
               ingredients: recipe.ingredients,
               image: recipe.image_url,
               cookingTime: recipe.cooking_time
-            }; // console.log(state.recipe);
-
-            _context.next = 12;
+            };
+            console.log(state.recipe);
+            _context.next = 13;
             break;
 
-          case 8:
-            _context.prev = 8;
+          case 9:
+            _context.prev = 9;
             _context.t0 = _context["catch"](0);
             // Temp error handling
             console.log("".concat(_context.t0, " \uD83D\uDE12\uD83D\uDE12\uD83D\uDE12"));
             throw _context.t0;
 
-          case 12:
+          case 13:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 8]]);
+    }, _callee, null, [[0, 9]]);
   }));
 
   return function laodRecipe(_x) {
@@ -1111,6 +1111,15 @@ var getSearchResultsPage = function getSearchResultsPage() {
 };
 
 exports.getSearchResultsPage = getSearchResultsPage;
+
+var updatingServings = function updatingServings(newServings) {
+  state.recipe.ingredients.foreach(function (ing) {
+    ing.quantity = ing.quantity * newServings / state.recipe.servings; // newQt = oldQt * newServings / oldservings
+  });
+  state.recipe.servings = newServings;
+};
+
+exports.updatingServings = updatingServings;
 },{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","./config.js":"src/js/config.js","./helper.js":"src/js/helper.js"}],"src/img/icons.svg":[function(require,module,exports) {
 module.exports = "/icons.ae3c38d5.svg";
 },{}],"src/js/views/view.js":[function(require,module,exports) {
@@ -2384,7 +2393,7 @@ var PaginationView = /*#__PURE__*/function (_View) {
         var goToPage = +btn.dataset.goto; // for the btn to know the page to goTo
         //   console.log(goToPage);
 
-        handler(goToPage);
+        handler(goToPage); // This will call controlPagination from controller js file
       });
     }
   }, {
@@ -2415,8 +2424,9 @@ var PaginationView = /*#__PURE__*/function (_View) {
       if (curPage < numPages) {
         return "".concat(generateMarkUpBtnPrev(), " ").concat(generateMarkUpBtnNext());
       } // page 1, no other pages
-      // return `only 1 page `;
 
+
+      return '';
     }
   }]);
 
@@ -17745,6 +17755,10 @@ var controlPagination = function controlPagination(goToPage) {
 
 
   _paginationView.default.render(model.state.search);
+};
+
+var controlServings = function controlServings() {
+  model.updatingServings(5);
 }; // This wil be our Subcriber to call controlRecipes function from view js file
 
 
@@ -17785,7 +17799,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60775" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62320" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -64,6 +64,10 @@ const controlPagination = function (goToPage) {
   paginationView.render(model.state.search);
 };
 
+const controlServings = function () {
+  model.updatingServings(5);
+};
+
 // This wil be our Subcriber to call controlRecipes function from view js file
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
