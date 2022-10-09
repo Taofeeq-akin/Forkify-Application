@@ -970,7 +970,7 @@ exports.getJSON = getJSON;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.updatingServings = exports.state = exports.loadSearchResults = exports.laodRecipe = exports.getSearchResultsPage = void 0;
+exports.updatingServings = exports.state = exports.loadSearchResults = exports.laodRecipe = exports.getSearchResultsPage = exports.addBookmark = void 0;
 
 var _regeneratorRuntime2 = require("regenerator-runtime");
 
@@ -993,7 +993,8 @@ var state = {
     results: [],
     page: 1,
     resultPerPage: _config.RES_PER_PAGE
-  }
+  },
+  bookmark: []
 };
 exports.state = state;
 
@@ -1122,6 +1123,15 @@ var updatingServings = function updatingServings(newServings) {
 };
 
 exports.updatingServings = updatingServings;
+
+var addBookmark = function addBookmark(recipe) {
+  // Add bookmark
+  state.bookmark.push(recipe); // Mark current recipe as bookmark
+
+  if (recipe.id === state.recipe.id) state.recipe.bookmarked === true;
+};
+
+exports.addBookmark = addBookmark;
 },{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","./config.js":"src/js/config.js","./helper.js":"src/js/helper.js"}],"src/img/icons.svg":[function(require,module,exports) {
 module.exports = "/icons.ae3c38d5.svg";
 },{}],"src/js/views/view.js":[function(require,module,exports) {
