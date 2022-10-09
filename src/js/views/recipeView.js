@@ -15,6 +15,14 @@ class RecipeView extends View {
     ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, handler)); // loop over instaed of listening to events multiple times
   }
 
+  addHandlerUpdateServings(handler) {
+    this._parentElement.addEventListener('click', function (e) {
+      const btn = e.target.closest('.btn--tiny');
+      console.log(btn);
+      handler();
+    });
+  }
+
   _generateMarkup() {
     return `
        <figure class="recipe__fig">
