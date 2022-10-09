@@ -19,6 +19,18 @@ export default class View {
 
     this._data = data;
     const newMarkup = this._generateMarkup();
+
+    // change markup string to real DOM node objects
+    const newDom = document.createRange().createContextualFragment(newMarkup);
+    const newElements = Array.from(newDom.querySelectorAll('*'));
+    const curElements = Array.from(this._parentElement.querySelectorAll('*'));
+
+    newElements.forEach((newEl, i) => {
+      const curEl = curElements[i];
+
+      // compare node list diff
+      console.log(curEl, newEl.isEqualNode(curEl));
+    });
   }
 
   _clear() {

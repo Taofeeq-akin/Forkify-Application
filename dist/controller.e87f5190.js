@@ -1167,7 +1167,17 @@ var View = /*#__PURE__*/function () {
       if (!data || Array.isArray(data) && data.length === 0) return this.renderError();
       this._data = data;
 
-      var newMarkup = this._generateMarkup();
+      var newMarkup = this._generateMarkup(); // change markup string to real DOM node objects
+
+
+      var newDom = document.createRange().createContextualFragment(newMarkup);
+      var newElements = Array.from(newDom.querySelectorAll('*'));
+      var curElements = Array.from(this._parentElement.querySelectorAll('*'));
+      newElements.forEach(function (newEl, i) {
+        var curEl = curElements[i]; // compare node list diff
+
+        console.log(curEl, newEl.isEqualNode(curEl));
+      });
     }
   }, {
     key: "_clear",
