@@ -1022,24 +1022,24 @@ var laodRecipe = /*#__PURE__*/function () {
               ingredients: recipe.ingredients,
               image: recipe.image_url,
               cookingTime: recipe.cooking_time
-            };
-            console.log(state.recipe);
-            _context.next = 13;
+            }; // console.log(state.recipe);
+
+            _context.next = 12;
             break;
 
-          case 9:
-            _context.prev = 9;
+          case 8:
+            _context.prev = 8;
             _context.t0 = _context["catch"](0);
             // Temp error handling
             console.log("".concat(_context.t0, " \uD83D\uDE12\uD83D\uDE12\uD83D\uDE12"));
             throw _context.t0;
 
-          case 13:
+          case 12:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 9]]);
+    }, _callee, null, [[0, 8]]);
   }));
 
   return function laodRecipe(_x) {
@@ -1064,9 +1064,9 @@ var loadSearchResults = /*#__PURE__*/function () {
 
           case 4:
             data = _context2.sent;
-            console.log(data); // loop through the array objects to give it diff proerty name
+            // console.log(data);
+            // loop through the array objects to give it diff proerty name
             // Using map cus it will retuen array
-
             state.search.results = data.data.recipes.map(function (rec) {
               return {
                 id: rec.id,
@@ -1076,21 +1076,21 @@ var loadSearchResults = /*#__PURE__*/function () {
               };
             }); // console.log(state.search.results);
 
-            _context2.next = 13;
+            _context2.next = 12;
             break;
 
-          case 9:
-            _context2.prev = 9;
+          case 8:
+            _context2.prev = 8;
             _context2.t0 = _context2["catch"](0);
             console.log("".concat(_context2.t0, " \uD83D\uDE12\uD83D\uDE12\uD83D\uDE12"));
             throw _context2.t0;
 
-          case 13:
+          case 12:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[0, 9]]);
+    }, _callee2, null, [[0, 8]]);
   }));
 
   return function loadSearchResults(_x2) {
@@ -1164,7 +1164,6 @@ var View = /*#__PURE__*/function () {
   }, {
     key: "update",
     value: function update(data) {
-      if (!data || Array.isArray(data) && data.length === 0) return this.renderError();
       this._data = data;
 
       var newMarkup = this._generateMarkup(); // change markup string to real DOM node objects
@@ -2356,7 +2355,8 @@ var ResultsView = /*#__PURE__*/function (_View) {
   }, {
     key: "_generateMarkupPreview",
     value: function _generateMarkupPreview(result) {
-      return "\n     <li class=\"preview\">\n        <a class=\"preview__link\"href=\"#".concat(result.id, "\">\n         <figure class=\"preview__fig\">\n           <img src=\"").concat(result.image, "\" alt=\"").concat(result.title, "\" />\n         </figure>\n         <div class=\"preview__data\">\n           <h4 class=\"preview__title\">").concat(result.title, "</h4>\n           <p class=\"preview__publisher\">").concat(result.publisher, "</p>\n         </div>\n        </a>\n     </li>\n");
+      var id = window.location.hash.slice(1);
+      return "\n     <li class=\"preview\">\n        <a class=\"preview__link ".concat(result.id === id ? "preview__link--active" : '', "\"href=\"#").concat(result.id, "\">\n         <figure class=\"preview__fig\">\n           <img src=\"").concat(result.image, "\" alt=\"").concat(result.title, "\" />\n         </figure>\n         <div class=\"preview__data\">\n           <h4 class=\"preview__title\">").concat(result.title, "</h4>\n           <p class=\"preview__publisher\">").concat(result.publisher, "</p>\n         </div>\n        </a>\n     </li>\n");
     }
   }]);
 
@@ -17703,32 +17703,35 @@ var controlRecipes = /*#__PURE__*/function () {
             return _context.abrupt("return");
 
           case 4:
-            _recipeView.default.renderSpinner(); // 1) Loading Recipe
+            _recipeView.default.renderSpinner(); // Update results view to mark selected
 
 
-            _context.next = 7;
+            _resultsView.default.update(model.getSearchResultsPage()); // 1) Loading Recipe
+
+
+            _context.next = 8;
             return model.laodRecipe(id);
 
-          case 7:
+          case 8:
             // will return a peomise since its an async function so we have to await it
             // 2) Rendering Recipe
             _recipeView.default.render(model.state.recipe);
 
-            _context.next = 13;
+            _context.next = 14;
             break;
 
-          case 10:
-            _context.prev = 10;
+          case 11:
+            _context.prev = 11;
             _context.t0 = _context["catch"](0);
 
             _recipeView.default.renderError();
 
-          case 13:
+          case 14:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 10]]);
+    }, _callee, null, [[0, 11]]);
   }));
 
   return function controlRecipes() {

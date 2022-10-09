@@ -28,7 +28,7 @@ export const laodRecipe = async function (id) {
       image: recipe.image_url,
       cookingTime: recipe.cooking_time,
     };
-    console.log(state.recipe);
+    // console.log(state.recipe);
   } catch (err) {
     // Temp error handling
     console.log(`${err} 😒😒😒`);
@@ -41,7 +41,7 @@ export const loadSearchResults = async function (query) {
   try {
     state.search.query = query;
     const data = await getJSON(`${API_URL}?search=${query}`);
-    console.log(data);
+    // console.log(data);
 
     // loop through the array objects to give it diff proerty name
     // Using map cus it will retuen array
