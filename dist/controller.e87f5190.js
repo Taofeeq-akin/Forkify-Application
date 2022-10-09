@@ -1174,9 +1174,14 @@ var View = /*#__PURE__*/function () {
       var newElements = Array.from(newDom.querySelectorAll('*'));
       var curElements = Array.from(this._parentElement.querySelectorAll('*'));
       newElements.forEach(function (newEl, i) {
-        var curEl = curElements[i]; // compare node list diff
+        var _newEl$firstChild;
 
-        console.log(curEl, newEl.isEqualNode(curEl));
+        var curEl = curElements[i]; // compare node list diff
+        // console.log(curEl, newEl.isEqualNode(curEl));
+
+        if (!newEl.isEqualNode(curEl) && ((_newEl$firstChild = newEl.firstChild) === null || _newEl$firstChild === void 0 ? void 0 : _newEl$firstChild.nodeValue.trim()) !== '') {
+          curEl.textContent = newEl.textContent;
+        }
       });
     }
   }, {
