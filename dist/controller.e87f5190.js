@@ -1113,7 +1113,7 @@ var getSearchResultsPage = function getSearchResultsPage() {
 exports.getSearchResultsPage = getSearchResultsPage;
 
 var updatingServings = function updatingServings(newServings) {
-  state.recipe.ingredients.foreach(function (ing) {
+  state.recipe.ingredients.forEach(function (ing) {
     ing.quantity = ing.quantity * newServings / state.recipe.servings; // newQt = oldQt * newServings / oldservings
   });
   state.recipe.servings = newServings;
@@ -17673,21 +17673,22 @@ var controlRecipes = /*#__PURE__*/function () {
             // 2) Rendering Recipe
             _recipeView.default.render(model.state.recipe);
 
-            _context.next = 13;
+            controlServings();
+            _context.next = 14;
             break;
 
-          case 10:
-            _context.prev = 10;
+          case 11:
+            _context.prev = 11;
             _context.t0 = _context["catch"](0);
 
             _recipeView.default.renderError();
 
-          case 13:
+          case 14:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 10]]);
+    }, _callee, null, [[0, 11]]);
   }));
 
   return function controlRecipes() {
@@ -17758,7 +17759,10 @@ var controlPagination = function controlPagination(goToPage) {
 };
 
 var controlServings = function controlServings() {
-  model.updatingServings(5);
+  // Update the recipe servings (in state)
+  model.updatingServings(5); //Update recipe View
+
+  _recipeView.default.render(model.state.recipe);
 }; // This wil be our Subcriber to call controlRecipes function from view js file
 
 

@@ -29,6 +29,8 @@ const controlRecipes = async function () {
 
     // 2) Rendering Recipe
     recipeView.render(model.state.recipe);
+
+    controlServings();
   } catch (err) {
     recipeView.renderError();
   }
@@ -65,7 +67,11 @@ const controlPagination = function (goToPage) {
 };
 
 const controlServings = function () {
+  // Update the recipe servings (in state)
   model.updatingServings(5);
+
+  //Update recipe View
+  recipeView.render(model.state.recipe);
 };
 
 // This wil be our Subcriber to call controlRecipes function from view js file
