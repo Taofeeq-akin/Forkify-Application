@@ -69,7 +69,8 @@ const controlServings = function (newServings) {
   model.updatingServings(newServings);
 
   //Update recipe View
-  recipeView.render(model.state.recipe);
+  // recipeView.render(model.state.recipe);
+  recipeView.update(model.state.recipe);
 };
 
 // This wil be our Subcriber to call controlRecipes function from view js file

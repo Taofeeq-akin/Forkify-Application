@@ -1162,6 +1162,14 @@ var View = /*#__PURE__*/function () {
       this._parentElement.insertAdjacentHTML('afterbegin', markup);
     }
   }, {
+    key: "update",
+    value: function update(data) {
+      if (!data || Array.isArray(data) && data.length === 0) return this.renderError();
+      this._data = data;
+
+      var newMarkup = this._generateMarkup();
+    }
+  }, {
     key: "_clear",
     value: function _clear() {
       this._parentElement.innerHTML = '';
@@ -17770,8 +17778,9 @@ var controlPagination = function controlPagination(goToPage) {
 var controlServings = function controlServings(newServings) {
   // Update the recipe servings (in state)
   model.updatingServings(newServings); //Update recipe View
+  // recipeView.render(model.state.recipe);
 
-  _recipeView.default.render(model.state.recipe);
+  _recipeView.default.update(model.state.recipe);
 }; // This wil be our Subcriber to call controlRecipes function from view js file
 
 
