@@ -1178,9 +1178,17 @@ var View = /*#__PURE__*/function () {
 
         var curEl = curElements[i]; // compare node list diff
         // console.log(curEl, newEl.isEqualNode(curEl));
+        // Update changed TEXT
 
         if (!newEl.isEqualNode(curEl) && ((_newEl$firstChild = newEl.firstChild) === null || _newEl$firstChild === void 0 ? void 0 : _newEl$firstChild.nodeValue.trim()) !== '') {
           curEl.textContent = newEl.textContent;
+        } // Update changed ATTRIBUTES
+
+
+        if (!newEl.isEqualNode(curEl)) {
+          Array.from(newEl.attributes).forEach(function (attr) {
+            return curEl.setAttribute(attr.name, attr.value);
+          });
         }
       });
     }
