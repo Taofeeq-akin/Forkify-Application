@@ -970,7 +970,7 @@ exports.getJSON = getJSON;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.updatingServings = exports.state = exports.loadSearchResults = exports.laodRecipe = exports.getSearchResultsPage = exports.addBookmark = void 0;
+exports.updatingServings = exports.state = exports.removeBookmark = exports.loadSearchResults = exports.laodRecipe = exports.getSearchResultsPage = exports.addBookmark = void 0;
 
 var _regeneratorRuntime2 = require("regenerator-runtime");
 
@@ -1136,6 +1136,16 @@ var addBookmark = function addBookmark(recipe) {
 };
 
 exports.addBookmark = addBookmark;
+
+var removeBookmark = function removeBookmark(id) {
+  var index = state.bookmarks.findIndex(function (el) {
+    return el.id === id;
+  });
+  state.bookmarks.splice(index, 1);
+  if (id === state.recipe.id) state.recipe.bookmarked = false;
+};
+
+exports.removeBookmark = removeBookmark;
 },{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","./config.js":"src/js/config.js","./helper.js":"src/js/helper.js"}],"src/img/icons.svg":[function(require,module,exports) {
 module.exports = "/icons.ae3c38d5.svg";
 },{}],"src/js/views/view.js":[function(require,module,exports) {
@@ -17836,7 +17846,7 @@ var controlServings = function controlServings(newServings) {
 };
 
 var controlAddBoookmark = function controlAddBoookmark() {
-  model.addBookmark(model.state.recipe);
+  if (!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe);else model.removeBookmark(model.state.recipe.id);
   console.log(model.state.recipe);
 
   _recipeView.default.update(model.state.recipe);
