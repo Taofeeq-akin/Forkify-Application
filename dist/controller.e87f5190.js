@@ -1024,23 +1024,27 @@ var laodRecipe = /*#__PURE__*/function () {
               image: recipe.image_url,
               cookingTime: recipe.cooking_time
             }; // console.log(state.recipe);
+            // To make bookmarked still true after reloap from api by clickong on another recipe
 
-            _context.next = 12;
+            if (state.bookmarks.some(function (bookmark) {
+              return bookmark.id === id;
+            })) state.recipe.bookmarked = true;else state.recipe.bookmarked = false;
+            _context.next = 13;
             break;
 
-          case 8:
-            _context.prev = 8;
+          case 9:
+            _context.prev = 9;
             _context.t0 = _context["catch"](0);
             // Temp error handling
             console.log("".concat(_context.t0, " \uD83D\uDE12\uD83D\uDE12\uD83D\uDE12"));
             throw _context.t0;
 
-          case 12:
+          case 13:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 8]]);
+    }, _callee, null, [[0, 9]]);
   }));
 
   return function laodRecipe(_x) {

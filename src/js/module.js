@@ -30,6 +30,11 @@ export const laodRecipe = async function (id) {
       cookingTime: recipe.cooking_time,
     };
     // console.log(state.recipe);
+
+    // To make bookmarked still true after reloap from api by clickong on another recipe
+    if (state.bookmarks.some(bookmark => bookmark.id === id))
+      state.recipe.bookmarked = true;
+    else state.recipe.bookmarked = false;
   } catch (err) {
     // Temp error handling
     console.log(`${err} 😒😒😒`);
