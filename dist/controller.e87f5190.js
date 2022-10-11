@@ -1180,7 +1180,7 @@ var clearBookmarks = function clearBookmarks() {
 
 var uploadRecipe = /*#__PURE__*/function () {
   var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(newRecipe) {
-    var ingredients;
+    var ingredients, recipe;
     return _regeneratorRuntime().wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
@@ -1203,22 +1203,32 @@ var uploadRecipe = /*#__PURE__*/function () {
                 unit: unit,
                 description: description
               };
-            });
-            console.log(ingredients);
-            _context3.next = 8;
+            }); // To set Recipe
+
+            recipe = {
+              title: newRecipe.title,
+              source_Url: newRecipe.sourceUrl,
+              image_url: newRecipe.image,
+              publisher: newRecipe.publisher,
+              cooking_time: +newRecipe.cookingTime,
+              servings: +newRecipe.servings,
+              ingredients: ingredients
+            };
+            console.log(recipe);
+            _context3.next = 9;
             break;
 
-          case 5:
-            _context3.prev = 5;
+          case 6:
+            _context3.prev = 6;
             _context3.t0 = _context3["catch"](0);
             throw _context3.t0;
 
-          case 8:
+          case 9:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3, null, [[0, 5]]);
+    }, _callee3, null, [[0, 6]]);
   }));
 
   return function uploadRecipe(_x3) {
