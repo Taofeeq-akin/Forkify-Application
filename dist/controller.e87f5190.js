@@ -1129,7 +1129,7 @@ var updatingServings = function updatingServings(newServings) {
 exports.updatingServings = updatingServings;
 
 var persistBookmark = function persistBookmark() {
-  localStorage.getItem('bookmarks', JSON.stringify(state.bookmarks));
+  localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
 };
 
 var addBookmark = function addBookmark(recipe) {
@@ -1152,6 +1152,14 @@ var removeBookmark = function removeBookmark(id) {
 };
 
 exports.removeBookmark = removeBookmark;
+
+var init = function init() {
+  var storage = localStorage.getItem('bookmarks');
+  if (storage) state.bookmarks = JSON.parse(storage); // to turn string into object
+};
+
+init();
+console.log(state.bookmarks);
 },{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","./config.js":"src/js/config.js","./helper.js":"src/js/helper.js"}],"src/img/icons.svg":[function(require,module,exports) {
 module.exports = "/icons.ae3c38d5.svg";
 },{}],"src/js/views/view.js":[function(require,module,exports) {
@@ -2662,6 +2670,11 @@ var BookmarksView = /*#__PURE__*/function (_View) {
   }
 
   _createClass(BookmarksView, [{
+    key: "addHandlerRender",
+    value: function addHandlerRender(handler) {
+      window.addEventListener('load', handler);
+    }
+  }, {
     key: "_generateMarkup",
     value: function _generateMarkup() {
       // console.log(this._data);
@@ -18019,10 +18032,16 @@ var controlAddBoookmark = function controlAddBoookmark() {
   _recipeView.default.update(model.state.recipe);
 
   _bookmarksView.default.render(model.state.bookmarks);
+};
+
+var controlBookmarks = function controlBookmarks() {
+  _bookmarksView.default.render(model.state.bookmarks);
 }; // This wil be our Subcriber to call controlRecipes function from view js file
 
 
 var init = function init() {
+  _bookmarksView.default.addHandlerRender(controlBookmarks);
+
   _recipeView.default.addHandlerRender(controlRecipes);
 
   _recipeView.default.addHandlerUpdateServings(controlServings);
