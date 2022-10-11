@@ -880,7 +880,7 @@ try {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TIMEOUT_SEC = exports.RES_PER_PAGE = exports.API_URL = void 0;
+exports.TIMEOUT_SEC = exports.RES_PER_PAGE = exports.KEY = exports.API_URL = void 0;
 // In this file we will be keeping reuseable variables and also responsible for kind of defining some important data about the app itself
 var API_URL = 'https://forkify-api.herokuapp.com/api/v2/recipes';
 exports.API_URL = API_URL;
@@ -888,13 +888,15 @@ var TIMEOUT_SEC = 10;
 exports.TIMEOUT_SEC = TIMEOUT_SEC;
 var RES_PER_PAGE = 10;
 exports.RES_PER_PAGE = RES_PER_PAGE;
+var KEY = 'dd503538-0e03-449f-8628-0519f5a00212';
+exports.KEY = KEY;
 },{}],"src/js/helper.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getJSON = void 0;
+exports.sendJSON = exports.getJSON = void 0;
 
 var _regeneratorRuntime2 = require("regenerator-runtime");
 
@@ -964,6 +966,62 @@ var getJSON = /*#__PURE__*/function () {
 }();
 
 exports.getJSON = getJSON;
+
+var sendJSON = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(url, uploadData) {
+    var fetchPro, res, data;
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            fetchPro = fetch(url, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(uploadData)
+            });
+            _context2.next = 4;
+            return Promise.race([fetchPro, timeout(_config.TIMEOUT_SEC)]);
+
+          case 4:
+            res = _context2.sent;
+            _context2.next = 7;
+            return res.json();
+
+          case 7:
+            data = _context2.sent;
+
+            if (res.ok) {
+              _context2.next = 10;
+              break;
+            }
+
+            throw new Error("".concat(data.message, " (").concat(res.status, ")"));
+
+          case 10:
+            return _context2.abrupt("return", data);
+
+          case 13:
+            _context2.prev = 13;
+            _context2.t0 = _context2["catch"](0);
+            throw _context2.t0;
+
+          case 16:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, null, [[0, 13]]);
+  }));
+
+  return function sendJSON(_x2, _x3) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+exports.sendJSON = sendJSON;
 },{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","./config":"src/js/config.js"}],"src/js/module.js":[function(require,module,exports) {
 "use strict";
 
@@ -1180,7 +1238,7 @@ var clearBookmarks = function clearBookmarks() {
 
 var uploadRecipe = /*#__PURE__*/function () {
   var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(newRecipe) {
-    var ingredients, recipe;
+    var ingredients, recipe, data;
     return _regeneratorRuntime().wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
@@ -1207,28 +1265,34 @@ var uploadRecipe = /*#__PURE__*/function () {
 
             recipe = {
               title: newRecipe.title,
-              source_Url: newRecipe.sourceUrl,
+              source_url: newRecipe.sourceUrl,
               image_url: newRecipe.image,
               publisher: newRecipe.publisher,
               cooking_time: +newRecipe.cookingTime,
               servings: +newRecipe.servings,
               ingredients: ingredients
             };
-            console.log(recipe);
-            _context3.next = 9;
+            _context3.next = 5;
+            return (0, _helper.sendJSON)("".concat(_config.API_URL, "?key=").concat(_config.KEY), recipe);
+
+          case 5:
+            data = _context3.sent;
+            console.log(data); // console.log(recipe);
+
+            _context3.next = 12;
             break;
 
-          case 6:
-            _context3.prev = 6;
+          case 9:
+            _context3.prev = 9;
             _context3.t0 = _context3["catch"](0);
             throw _context3.t0;
 
-          case 9:
+          case 12:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3, null, [[0, 6]]);
+    }, _callee3, null, [[0, 9]]);
   }));
 
   return function uploadRecipe(_x3) {
@@ -18319,7 +18383,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52212" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56432" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

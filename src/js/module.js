@@ -1,6 +1,6 @@
 import { async } from 'regenerator-runtime';
-import { API_URL, RES_PER_PAGE } from './config.js';
-import { getJSON } from './helper.js';
+import { API_URL, RES_PER_PAGE, KEY } from './config.js';
+import { getJSON, sendJSON } from './helper.js';
 
 export const state = {
   recipe: {},
@@ -141,7 +141,7 @@ export const uploadRecipe = async function (newRecipe) {
     // To set Recipe
     const recipe = {
       title: newRecipe.title,
-      source_Url: newRecipe.sourceUrl,
+      source_url: newRecipe.sourceUrl,
       image_url: newRecipe.image,
       publisher: newRecipe.publisher,
       cooking_time: +newRecipe.cookingTime,
@@ -149,7 +149,10 @@ export const uploadRecipe = async function (newRecipe) {
       ingredients,
     };
 
-    console.log(recipe);
+    const data = await sendJSON(`${API_URL}?key=${KEY}`, recipe);
+    console.log(data);
+
+    // console.log(recipe);
   } catch (err) {
     throw err;
   }
