@@ -1185,30 +1185,40 @@ var uploadRecipe = /*#__PURE__*/function () {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
+            _context3.prev = 0;
             // console.log(Object.entries(newRecipe));
             ingredients = Object.entries(newRecipe).filter(function (entry) {
               return entry[0].startsWith('ingredient') && entry[1] !== '';
             }).map(function (ing) {
-              var _ing$1$replaceAll$spl = ing[1].replaceAll(' ', '').split(','),
-                  _ing$1$replaceAll$spl2 = _slicedToArray(_ing$1$replaceAll$spl, 3),
-                  quantity = _ing$1$replaceAll$spl2[0],
-                  unit = _ing$1$replaceAll$spl2[1],
-                  description = _ing$1$replaceAll$spl2[2];
+              var ingArr = ing[1].replaceAll(' ', '').split(',');
+              if (ingArr.length !== 3) throw new Error('Wrong ingredent format! Plaese use the correct format :)');
+
+              var _ingArr = _slicedToArray(ingArr, 3),
+                  quantity = _ingArr[0],
+                  unit = _ingArr[1],
+                  description = _ingArr[2];
 
               return {
-                quantity: quantity,
+                quantity: quantity ? +quantity : null,
                 unit: unit,
                 description: description
               };
             });
             console.log(ingredients);
+            _context3.next = 8;
+            break;
 
-          case 2:
+          case 5:
+            _context3.prev = 5;
+            _context3.t0 = _context3["catch"](0);
+            throw _context3.t0;
+
+          case 8:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3);
+    }, _callee3, null, [[0, 5]]);
   }));
 
   return function uploadRecipe(_x3) {
@@ -18058,6 +18068,8 @@ require("core-js/stable");
 
 require("regenerator-runtime/runtime");
 
+var _regeneratorRuntime2 = require("regenerator-runtime");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -18072,7 +18084,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//regenerator-runtime for polifying async await
 // import { async } from 'regenerator-runtime';
 // https://forkify-api.herokuapp.com/v2
 ///////////////////////////////////////
@@ -18217,10 +18228,40 @@ var controlBookmarks = function controlBookmarks() {
   _bookmarksView.default.render(model.state.bookmarks);
 };
 
-var controlAddRecipe = function controlAddRecipe(newRecipe) {
-  console.log(newRecipe);
-  model.uploadRecipe(newRecipe);
-}; // This wil be our Subcriber to call controlRecipes function from view js file
+var controlAddRecipe = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(newRecipe) {
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.prev = 0;
+            console.log(newRecipe);
+            _context3.next = 4;
+            return model.uploadRecipe(newRecipe);
+
+          case 4:
+            _context3.next = 10;
+            break;
+
+          case 6:
+            _context3.prev = 6;
+            _context3.t0 = _context3["catch"](0);
+            console.error('😍', _context3.t0);
+
+            _addRecipeView.default.renderError(_context3.t0.message);
+
+          case 10:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3, null, [[0, 6]]);
+  }));
+
+  return function controlAddRecipe(_x) {
+    return _ref3.apply(this, arguments);
+  };
+}(); // This wil be our Subcriber to call controlRecipes function from view js file
 
 
 var init = function init() {
@@ -18240,7 +18281,7 @@ var init = function init() {
 };
 
 init();
-},{"./module.js":"src/js/module.js","./views/recipeView.js":"src/js/views/recipeView.js","./views/searchView.js":"src/js/views/searchView.js","./views/resultsView.js":"src/js/views/resultsView.js","./views/paginationView.js":"src/js/views/paginationView.js","./views/bookmarksView.js":"src/js/views/bookmarksView.js","./views/addRecipeView.js":"src/js/views/addRecipeView.js","core-js/stable":"node_modules/core-js/stable/index.js","regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./module.js":"src/js/module.js","./views/recipeView.js":"src/js/views/recipeView.js","./views/searchView.js":"src/js/views/searchView.js","./views/resultsView.js":"src/js/views/resultsView.js","./views/paginationView.js":"src/js/views/paginationView.js","./views/bookmarksView.js":"src/js/views/bookmarksView.js","./views/addRecipeView.js":"src/js/views/addRecipeView.js","core-js/stable":"node_modules/core-js/stable/index.js","regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","regenerator-runtime":"node_modules/regenerator-runtime/runtime.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;

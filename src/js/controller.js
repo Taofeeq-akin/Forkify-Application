@@ -8,6 +8,7 @@ import addRecipeView from './views/addRecipeView.js';
 
 import 'core-js/stable'; // install for pollying all
 import 'regenerator-runtime/runtime'; //regenerator-runtime for polifying async await
+import { async } from 'regenerator-runtime';
 // import { async } from 'regenerator-runtime';
 
 // https://forkify-api.herokuapp.com/v2
@@ -93,9 +94,14 @@ const controlBookmarks = function () {
   bookmarksView.render(model.state.bookmarks);
 };
 
-const controlAddRecipe = function (newRecipe) {
-  console.log(newRecipe);
-  model.uploadRecipe(newRecipe);
+const controlAddRecipe = async function (newRecipe) {
+  try {
+    console.log(newRecipe);
+    await model.uploadRecipe(newRecipe);
+  } catch (err) {
+    console.error('😍', err);
+    addRecipeView.renderError(err.message);
+  }
 };
 
 // This wil be our Subcriber to call controlRecipes function from view js file
