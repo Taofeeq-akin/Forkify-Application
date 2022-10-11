@@ -3,6 +3,7 @@ import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
 import resultsView from './views/resultsView.js';
 import paginationView from './views/paginationView.js';
+import bookmarksView from './views/bookmarksView.js';
 
 import 'core-js/stable'; // install for pollying all
 import 'regenerator-runtime/runtime'; //regenerator-runtime for polifying async await
@@ -26,6 +27,7 @@ const controlRecipes = async function () {
 
     // Update results view to mark selected
     resultsView.update(model.getSearchResultsPage());
+    bookmarksView.update(model.state.bookmarks);
 
     // 1) Loading Recipe
     await model.laodRecipe(id); // will return a peomise since its an async function so we have to await it
@@ -80,8 +82,10 @@ const controlAddBoookmark = function () {
   if (!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe);
   else model.removeBookmark(model.state.recipe.id);
 
-  console.log(model.state.recipe);
+  // console.log(model.state.recipe);
   recipeView.update(model.state.recipe);
+
+  bookmarksView.render(model.state.bookmarks);
 };
 
 // This wil be our Subcriber to call controlRecipes function from view js file
