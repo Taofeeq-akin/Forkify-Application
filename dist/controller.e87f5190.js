@@ -2757,6 +2757,8 @@ var AddRecipeView = /*#__PURE__*/function (_View) {
 
     _this._addHandlerShowWindow();
 
+    _this._addHandlerHideWindow();
+
     return _this;
   }
 
@@ -2771,6 +2773,13 @@ var AddRecipeView = /*#__PURE__*/function (_View) {
     key: "_addHandlerShowWindow",
     value: function _addHandlerShowWindow() {
       this._btnOpen.addEventListener('click', this.toggleWindow.bind(this));
+    }
+  }, {
+    key: "_addHandlerHideWindow",
+    value: function _addHandlerHideWindow() {
+      this._btnClose.addEventListener('click', this.toggleWindow.bind(this));
+
+      this._overlay.addEventListener('click', this.toggleWindow.bind(this));
     }
   }]);
 
