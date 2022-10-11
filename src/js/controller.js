@@ -5,6 +5,7 @@ import resultsView from './views/resultsView.js';
 import paginationView from './views/paginationView.js';
 import bookmarksView from './views/bookmarksView.js';
 import addRecipeView from './views/addRecipeView.js';
+import { MODAL_CLOSE_SEC } from './config.js';
 
 import 'core-js/stable'; // install for pollying all
 import 'regenerator-runtime/runtime'; //regenerator-runtime for polifying async await
@@ -96,8 +97,21 @@ const controlBookmarks = function () {
 
 const controlAddRecipe = async function (newRecipe) {
   try {
-    console.log(newRecipe);
+    addRecipeView.renderSpinner();
+
+    // Render the new recipe data
     await model.uploadRecipe(newRecipe);
+
+    // Render upload recipe
+    recipeView.render(model.state.recipe);
+
+    // Success Message
+    addRecipeView.renderMessage();
+
+    // close form window
+    setTimeout(function () {
+      addRecipeView.toggleWindow();
+    }, MODAL_CLOSE_SEC * 1000);
   } catch (err) {
     console.error('😍', err);
     addRecipeView.renderError(err.message);

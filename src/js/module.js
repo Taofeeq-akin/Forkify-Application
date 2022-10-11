@@ -13,22 +13,27 @@ export const state = {
   bookmarks: [],
 };
 
+const createReecipeObject = function (data) {
+  const { recipe } = data.data; // since we have recipe on both side we can just distruct the variable
+  return {
+    id: recipe.id,
+    title: recipe.title,
+    servings: recipe.servings,
+    sourceUrl: recipe.source_url,
+    publisher: recipe.publisher,
+    ingredients: recipe.ingredients,
+    image: recipe.image_url,
+    cookingTime: recipe.cooking_time,
+    ...(recipe.key && { key: recipe.key }), // Add key if not available yet
+  };
+};
+
 export const laodRecipe = async function (id) {
   try {
     const data = await getJSON(`${API_URL}/${id}`);
     // console.log(data);
 
-    const { recipe } = data.data; // since we have recipe on both side we can just distruct the variable
-    state.recipe = {
-      id: recipe.id,
-      title: recipe.title,
-      servings: recipe.servings,
-      sourceUrl: recipe.source_url,
-      publisher: recipe.publisher,
-      ingredients: recipe.ingredients,
-      image: recipe.image_url,
-      cookingTime: recipe.cooking_time,
-    };
+    state.recipe = createReecipeObject(data);
     // console.log(state.recipe);
 
     // To make bookmarked still true after reloap from api by clickong on another recipe
@@ -150,7 +155,8 @@ export const uploadRecipe = async function (newRecipe) {
     };
 
     const data = await sendJSON(`${API_URL}?key=${KEY}`, recipe);
-    console.log(data);
+    state.recipe = createReecipeObject(data);
+    addBookmark(state.recipe);
 
     // console.log(recipe);
   } catch (err) {

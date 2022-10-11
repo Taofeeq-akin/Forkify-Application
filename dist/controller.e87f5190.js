@@ -880,7 +880,7 @@ try {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TIMEOUT_SEC = exports.RES_PER_PAGE = exports.KEY = exports.API_URL = void 0;
+exports.TIMEOUT_SEC = exports.RES_PER_PAGE = exports.MODAL_CLOSE_SEC = exports.KEY = exports.API_URL = void 0;
 // In this file we will be keeping reuseable variables and also responsible for kind of defining some important data about the app itself
 var API_URL = 'https://forkify-api.herokuapp.com/api/v2/recipes';
 exports.API_URL = API_URL;
@@ -890,6 +890,8 @@ var RES_PER_PAGE = 10;
 exports.RES_PER_PAGE = RES_PER_PAGE;
 var KEY = 'dd503538-0e03-449f-8628-0519f5a00212';
 exports.KEY = KEY;
+var MODAL_CLOSE_SEC = 3;
+exports.MODAL_CLOSE_SEC = MODAL_CLOSE_SEC;
 },{}],"src/js/helper.js":[function(require,module,exports) {
 "use strict";
 
@@ -1056,6 +1058,12 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var state = {
   recipe: {},
   search: {
@@ -1068,9 +1076,26 @@ var state = {
 };
 exports.state = state;
 
+var createReecipeObject = function createReecipeObject(data) {
+  var recipe = data.data.recipe; // since we have recipe on both side we can just distruct the variable
+
+  return _objectSpread({
+    id: recipe.id,
+    title: recipe.title,
+    servings: recipe.servings,
+    sourceUrl: recipe.source_url,
+    publisher: recipe.publisher,
+    ingredients: recipe.ingredients,
+    image: recipe.image_url,
+    cookingTime: recipe.cooking_time
+  }, recipe.key && {
+    key: recipe.key
+  });
+};
+
 var laodRecipe = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(id) {
-    var data, recipe;
+    var data;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -1082,39 +1107,28 @@ var laodRecipe = /*#__PURE__*/function () {
           case 3:
             data = _context.sent;
             // console.log(data);
-            recipe = data.data.recipe; // since we have recipe on both side we can just distruct the variable
-
-            state.recipe = {
-              id: recipe.id,
-              title: recipe.title,
-              servings: recipe.servings,
-              sourceUrl: recipe.source_url,
-              publisher: recipe.publisher,
-              ingredients: recipe.ingredients,
-              image: recipe.image_url,
-              cookingTime: recipe.cooking_time
-            }; // console.log(state.recipe);
+            state.recipe = createReecipeObject(data); // console.log(state.recipe);
             // To make bookmarked still true after reloap from api by clickong on another recipe
 
             if (state.bookmarks.some(function (bookmark) {
               return bookmark.id === id;
             })) state.recipe.bookmarked = true;else state.recipe.bookmarked = false;
-            _context.next = 13;
+            _context.next = 12;
             break;
 
-          case 9:
-            _context.prev = 9;
+          case 8:
+            _context.prev = 8;
             _context.t0 = _context["catch"](0);
             // Temp error handling
             console.log("".concat(_context.t0, " \uD83D\uDE12\uD83D\uDE12\uD83D\uDE12"));
             throw _context.t0;
 
-          case 13:
+          case 12:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 9]]);
+    }, _callee, null, [[0, 8]]);
   }));
 
   return function laodRecipe(_x) {
@@ -1277,22 +1291,23 @@ var uploadRecipe = /*#__PURE__*/function () {
 
           case 5:
             data = _context3.sent;
-            console.log(data); // console.log(recipe);
+            state.recipe = createReecipeObject(data);
+            addBookmark(state.recipe); // console.log(recipe);
 
-            _context3.next = 12;
+            _context3.next = 13;
             break;
 
-          case 9:
-            _context3.prev = 9;
+          case 10:
+            _context3.prev = 10;
             _context3.t0 = _context3["catch"](0);
             throw _context3.t0;
 
-          case 12:
+          case 13:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3, null, [[0, 9]]);
+    }, _callee3, null, [[0, 10]]);
   }));
 
   return function uploadRecipe(_x3) {
@@ -2895,6 +2910,8 @@ var AddRecipeView = /*#__PURE__*/function (_View) {
     _this = _super.call(this);
 
     _defineProperty(_assertThisInitialized(_this), "_parentElement", document.querySelector('.upload'));
+
+    _defineProperty(_assertThisInitialized(_this), "_message", 'Y0u have Successfully upload yur recipe :)');
 
     _defineProperty(_assertThisInitialized(_this), "_window", document.querySelector('.add-recipe-window'));
 
@@ -18138,6 +18155,8 @@ var _bookmarksView = _interopRequireDefault(require("./views/bookmarksView.js"))
 
 var _addRecipeView = _interopRequireDefault(require("./views/addRecipeView.js"));
 
+var _config = require("./config.js");
+
 require("core-js/stable");
 
 require("regenerator-runtime/runtime");
@@ -18309,27 +18328,40 @@ var controlAddRecipe = /*#__PURE__*/function () {
         switch (_context3.prev = _context3.next) {
           case 0:
             _context3.prev = 0;
-            console.log(newRecipe);
+
+            _addRecipeView.default.renderSpinner(); // Render the new recipe data
+
+
             _context3.next = 4;
             return model.uploadRecipe(newRecipe);
 
           case 4:
-            _context3.next = 10;
+            // Render upload recipe
+            _recipeView.default.render(model.state.recipe); // Success Message
+
+
+            _addRecipeView.default.renderMessage(); // close form window
+
+
+            setTimeout(function () {
+              _addRecipeView.default.toggleWindow();
+            }, _config.MODAL_CLOSE_SEC * 1000);
+            _context3.next = 13;
             break;
 
-          case 6:
-            _context3.prev = 6;
+          case 9:
+            _context3.prev = 9;
             _context3.t0 = _context3["catch"](0);
             console.error('😍', _context3.t0);
 
             _addRecipeView.default.renderError(_context3.t0.message);
 
-          case 10:
+          case 13:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3, null, [[0, 6]]);
+    }, _callee3, null, [[0, 9]]);
   }));
 
   return function controlAddRecipe(_x) {
@@ -18355,7 +18387,7 @@ var init = function init() {
 };
 
 init();
-},{"./module.js":"src/js/module.js","./views/recipeView.js":"src/js/views/recipeView.js","./views/searchView.js":"src/js/views/searchView.js","./views/resultsView.js":"src/js/views/resultsView.js","./views/paginationView.js":"src/js/views/paginationView.js","./views/bookmarksView.js":"src/js/views/bookmarksView.js","./views/addRecipeView.js":"src/js/views/addRecipeView.js","core-js/stable":"node_modules/core-js/stable/index.js","regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","regenerator-runtime":"node_modules/regenerator-runtime/runtime.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./module.js":"src/js/module.js","./views/recipeView.js":"src/js/views/recipeView.js","./views/searchView.js":"src/js/views/searchView.js","./views/resultsView.js":"src/js/views/resultsView.js","./views/paginationView.js":"src/js/views/paginationView.js","./views/bookmarksView.js":"src/js/views/bookmarksView.js","./views/addRecipeView.js":"src/js/views/addRecipeView.js","./config.js":"src/js/config.js","core-js/stable":"node_modules/core-js/stable/index.js","regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","regenerator-runtime":"node_modules/regenerator-runtime/runtime.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
