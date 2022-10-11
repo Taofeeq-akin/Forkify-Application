@@ -1128,11 +1128,16 @@ var updatingServings = function updatingServings(newServings) {
 
 exports.updatingServings = updatingServings;
 
+var persistBookmark = function persistBookmark() {
+  localStorage.getItem('bookmarks', JSON.stringify(state.bookmarks));
+};
+
 var addBookmark = function addBookmark(recipe) {
   // Add bookmark
   state.bookmarks.push(recipe); // Mark current recipe as bookmark
 
   if (recipe.id === state.recipe.id) state.recipe.bookmarked = true;
+  persistBookmark();
 };
 
 exports.addBookmark = addBookmark;
@@ -1143,6 +1148,7 @@ var removeBookmark = function removeBookmark(id) {
   });
   state.bookmarks.splice(index, 1);
   if (id === state.recipe.id) state.recipe.bookmarked = false;
+  persistBookmark();
 };
 
 exports.removeBookmark = removeBookmark;
@@ -2467,8 +2473,8 @@ var ResultsView = /*#__PURE__*/function (_View) {
     key: "_generateMarkup",
     value: function _generateMarkup() {
       // console.log(this._data);
-      return this._data.map(function (bookmark) {
-        return _previewView.default.render(bookmark, false);
+      return this._data.map(function (result) {
+        return _previewView.default.render(result, false);
       }).join('');
     }
   }]);
