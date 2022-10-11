@@ -95,16 +95,17 @@ const controlBookmarks = function () {
 
 const controlAddRecipe = function (newRecipe) {
   console.log(newRecipe);
+  model.uploadRecipe(newRecipe);
 };
 
 // This wil be our Subcriber to call controlRecipes function from view js file
 const init = function () {
-  addRecipeView.addHandlerUpload(controlAddRecipe);
   bookmarksView.addHandlerRender(controlBookmarks);
   recipeView.addHandlerRender(controlRecipes);
   recipeView.addHandlerUpdateServings(controlServings);
   recipeView.addHandlerAddBookmark(controlAddBoookmark);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
+  addRecipeView.addHandlerUpload(controlAddRecipe);
 };
 init();
