@@ -105,6 +105,12 @@ const controlAddRecipe = async function (newRecipe) {
     // Render upload recipe
     recipeView.render(model.state.recipe);
 
+    // Render bookmark view
+    bookmarksView.render(model.state.bookmarks);
+
+    // Change ID
+    window.history.pushState(null, '', `#${model.state.recipe.id}`);
+
     // Success Message
     addRecipeView.renderMessage();
 

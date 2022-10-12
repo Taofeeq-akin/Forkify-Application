@@ -898,7 +898,7 @@ exports.MODAL_CLOSE_SEC = MODAL_CLOSE_SEC;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.sendJSON = exports.getJSON = void 0;
+exports.AJAX = void 0;
 
 var _regeneratorRuntime2 = require("regenerator-runtime");
 
@@ -920,110 +920,96 @@ var timeout = function timeout(s) {
   });
 };
 
-var getJSON = /*#__PURE__*/function () {
+var AJAX = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(url) {
-    var res, data;
+    var uploadData,
+        fetchPro,
+        res,
+        data,
+        _args = arguments;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _context.prev = 0;
-            _context.next = 3;
-            return Promise.race([fetch(url), timeout(_config.TIMEOUT_SEC)]);
-
-          case 3:
-            res = _context.sent;
-            _context.next = 6;
-            return res.json();
-
-          case 6:
-            data = _context.sent;
-
-            if (res.ok) {
-              _context.next = 9;
-              break;
-            }
-
-            throw new Error("".concat(data.message, " (").concat(res.status, ")"));
-
-          case 9:
-            return _context.abrupt("return", data);
-
-          case 12:
-            _context.prev = 12;
-            _context.t0 = _context["catch"](0);
-            throw _context.t0;
-
-          case 15:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee, null, [[0, 12]]);
-  }));
-
-  return function getJSON(_x) {
-    return _ref.apply(this, arguments);
-  };
-}();
-
-exports.getJSON = getJSON;
-
-var sendJSON = /*#__PURE__*/function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(url, uploadData) {
-    var fetchPro, res, data;
-    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            _context2.prev = 0;
-            fetchPro = fetch(url, {
+            uploadData = _args.length > 1 && _args[1] !== undefined ? _args[1] : undefined;
+            fetchPro = uploadData ? fetch(url, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
               },
               body: JSON.stringify(uploadData)
-            });
-            _context2.next = 4;
+            }) : fetch(url);
+            _context.next = 4;
             return Promise.race([fetchPro, timeout(_config.TIMEOUT_SEC)]);
 
           case 4:
-            res = _context2.sent;
-            _context2.next = 7;
+            res = _context.sent;
+            _context.next = 7;
             return res.json();
 
           case 7:
-            data = _context2.sent;
+            data = _context.sent;
 
             if (res.ok) {
-              _context2.next = 10;
+              _context.next = 10;
               break;
             }
 
             throw new Error("".concat(data.message, " (").concat(res.status, ")"));
 
           case 10:
-            return _context2.abrupt("return", data);
+            return _context.abrupt("return", data);
 
-          case 13:
-            _context2.prev = 13;
-            _context2.t0 = _context2["catch"](0);
-            throw _context2.t0;
-
-          case 16:
+          case 11:
           case "end":
-            return _context2.stop();
+            return _context.stop();
         }
       }
-    }, _callee2, null, [[0, 13]]);
+    }, _callee);
   }));
 
-  return function sendJSON(_x2, _x3) {
-    return _ref2.apply(this, arguments);
+  return function AJAX(_x) {
+    return _ref.apply(this, arguments);
   };
 }();
+/*
+export const getJSON = async function (url) {
+  try {
+    const fetchPro = fetch(url);
+    const res = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)]);
+    const data = await res.json(); // to get data from fetch api and store it to the variable
+    // console.log(res, data);
 
-exports.sendJSON = sendJSON;
+    if (!res.ok) throw new Error(`${data.message} (${res.status})`);
+    return data; // will be the resolved value that getJSON function returns
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const sendJSON = async function (url, uploadData) {
+  try {
+    const fetchPro = fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(uploadData),
+    });
+
+    const res = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)]);
+    const data = await res.json();
+
+    if (!res.ok) throw new Error(`${data.message} (${res.status})`);
+    return data;
+  } catch (err) {
+    throw err;
+  }
+};
+*/
+
+
+exports.AJAX = AJAX;
 },{"regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","./config":"src/js/config.js"}],"src/js/module.js":[function(require,module,exports) {
 "use strict";
 
@@ -1102,7 +1088,7 @@ var laodRecipe = /*#__PURE__*/function () {
           case 0:
             _context.prev = 0;
             _context.next = 3;
-            return (0, _helper.getJSON)("".concat(_config.API_URL, "/").concat(id));
+            return (0, _helper.AJAX)("".concat(_config.API_URL, "/").concat(id));
 
           case 3:
             data = _context.sent;
@@ -1149,7 +1135,7 @@ var loadSearchResults = /*#__PURE__*/function () {
             _context2.prev = 0;
             state.search.query = query;
             _context2.next = 4;
-            return (0, _helper.getJSON)("".concat(_config.API_URL, "?search=").concat(query));
+            return (0, _helper.AJAX)("".concat(_config.API_URL, "?search=").concat(query));
 
           case 4:
             data = _context2.sent;
@@ -1208,6 +1194,7 @@ var updatingServings = function updatingServings(newServings) {
     ing.quantity = ing.quantity * newServings / state.recipe.servings; // newQt = oldQt * newServings / oldservings
   });
   state.recipe.servings = newServings;
+  localStorage.clear('bookmarks');
 };
 
 exports.updatingServings = updatingServings;
@@ -1287,7 +1274,7 @@ var uploadRecipe = /*#__PURE__*/function () {
               ingredients: ingredients
             };
             _context3.next = 5;
-            return (0, _helper.sendJSON)("".concat(_config.API_URL, "?key=").concat(_config.KEY), recipe);
+            return (0, _helper.AJAX)("".concat(_config.API_URL, "?key=").concat(_config.KEY), recipe);
 
           case 5:
             data = _context3.sent;
@@ -2911,7 +2898,7 @@ var AddRecipeView = /*#__PURE__*/function (_View) {
 
     _defineProperty(_assertThisInitialized(_this), "_parentElement", document.querySelector('.upload'));
 
-    _defineProperty(_assertThisInitialized(_this), "_message", 'Y0u have Successfully upload yur recipe :)');
+    _defineProperty(_assertThisInitialized(_this), "_message", 'Y0u have Successfully upload your recipe :)');
 
     _defineProperty(_assertThisInitialized(_this), "_window", document.querySelector('.add-recipe-window'));
 
@@ -18337,8 +18324,13 @@ var controlAddRecipe = /*#__PURE__*/function () {
 
           case 4:
             // Render upload recipe
-            _recipeView.default.render(model.state.recipe); // Success Message
+            _recipeView.default.render(model.state.recipe); // Render bookmark view
 
+
+            _bookmarksView.default.render(model.state.bookmarks); // Change ID
+
+
+            window.history.pushState(null, '', "#".concat(model.state.recipe.id)); // Success Message
 
             _addRecipeView.default.renderMessage(); // close form window
 
@@ -18346,22 +18338,22 @@ var controlAddRecipe = /*#__PURE__*/function () {
             setTimeout(function () {
               _addRecipeView.default.toggleWindow();
             }, _config.MODAL_CLOSE_SEC * 1000);
-            _context3.next = 13;
+            _context3.next = 15;
             break;
 
-          case 9:
-            _context3.prev = 9;
+          case 11:
+            _context3.prev = 11;
             _context3.t0 = _context3["catch"](0);
             console.error('😍', _context3.t0);
 
             _addRecipeView.default.renderError(_context3.t0.message);
 
-          case 13:
+          case 15:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3, null, [[0, 9]]);
+    }, _callee3, null, [[0, 11]]);
   }));
 
   return function controlAddRecipe(_x) {
