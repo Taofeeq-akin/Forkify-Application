@@ -1088,7 +1088,7 @@ var laodRecipe = /*#__PURE__*/function () {
           case 0:
             _context.prev = 0;
             _context.next = 3;
-            return (0, _helper.AJAX)("".concat(_config.API_URL, "/").concat(id));
+            return (0, _helper.AJAX)("".concat(_config.API_URL, "/").concat(id, "?key=").concat(_config.KEY));
 
           case 3:
             data = _context.sent;
@@ -1135,7 +1135,7 @@ var loadSearchResults = /*#__PURE__*/function () {
             _context2.prev = 0;
             state.search.query = query;
             _context2.next = 4;
-            return (0, _helper.AJAX)("".concat(_config.API_URL, "?search=").concat(query));
+            return (0, _helper.AJAX)("".concat(_config.API_URL, "?search=").concat(query, "&key=").concat(_config.KEY));
 
           case 4:
             data = _context2.sent;

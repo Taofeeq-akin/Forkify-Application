@@ -30,7 +30,7 @@ const createReecipeObject = function (data) {
 
 export const laodRecipe = async function (id) {
   try {
-    const data = await AJAX(`${API_URL}/${id}`);
+    const data = await AJAX(`${API_URL}/${id}?key=${KEY}`);
     // console.log(data);
 
     state.recipe = createReecipeObject(data);
@@ -51,7 +51,7 @@ export const laodRecipe = async function (id) {
 export const loadSearchResults = async function (query) {
   try {
     state.search.query = query;
-    const data = await AJAX(`${API_URL}?search=${query}`);
+    const data = await AJAX(`${API_URL}?search=${query}&key=${KEY}`);
     // console.log(data);
 
     // loop through the array objects to give it diff proerty name
