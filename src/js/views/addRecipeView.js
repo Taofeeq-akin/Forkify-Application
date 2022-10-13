@@ -10,7 +10,7 @@ class AddRecipeView extends View {
   _btnOpen = document.querySelector('.nav__btn--add-recipe');
   _btnClose = document.querySelector('.btn--close-modal');
 
-  // cus the handler have nothing to do with controller
+  // cus the handler have nothing to do with controller abd will also call t from here....
   constructor() {
     super();
     this._addHandlerShowWindow();
@@ -37,7 +37,7 @@ class AddRecipeView extends View {
 
       //getting values from form Using formData
       const dataArr = [...new FormData(this)];
-      const data = Object.fromEntries(dataArr); // to turn it to object form
+      const data = Object.fromEntries(dataArr); // to turn array entry to an object form
       handler(data);
     });
   }

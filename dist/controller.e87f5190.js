@@ -2547,7 +2547,7 @@ var PreviewView = /*#__PURE__*/function (_View) {
     key: "_generateMarkup",
     value: function _generateMarkup() {
       var id = window.location.hash.slice(1);
-      return "\n     <li class=\"preview\">\n        <a class=\"preview__link ".concat(this._data.id === id ? "preview__link--active" : '', "\"href=\"#").concat(this._data.id, "\">\n         <figure class=\"preview__fig\">\n           <img src=\"").concat(this._data.image, "\" alt=\"").concat(this._data.title, "\" />\n         </figure>\n         <div class=\"preview__data\">\n           <h4 class=\"preview__title\">").concat(this._data.title, "</h4>\n           <p class=\"preview__publisher\">").concat(this._data.publisher, "</p>\n           <div class=\"recipe__user-generated ").concat(this._data.key ? '' : 'hidden', "\">\n              <svg>\n                <use href=\"").concat(_icons.default, "#icon-user\"></use>\n              </svg>\n            </div>\n         </div>\n        </a>\n     </li>\n");
+      return "\n     <li class=\"preview\">\n        <a class=\"preview__link ".concat(this._data.id === id ? "preview__link--active" : '', "\"href=\"#").concat(this._data.id, "\">\n         <figure class=\"preview__fig\">\n           <img src=\"").concat(this._data.image, "\" alt=\"").concat(this._data.title, "\" />\n         </figure>\n         <div class=\"preview__data\">\n           <h4 class=\"preview__title\">").concat(this._data.title, "</h4>\n           <p class=\"preview__publisher\">").concat(this._data.publisher, "</p>\n           <div class=\"preview__user-generated ").concat(this._data.key ? '' : 'hidden', "\">\n              <svg>\n                <use href=\"").concat(_icons.default, "#icon-user\"></use>\n              </svg>\n            </div>\n         </div>\n        </a>\n     </li>\n");
     }
   }]);
 
@@ -2892,7 +2892,7 @@ var AddRecipeView = /*#__PURE__*/function (_View) {
 
   var _super = _createSuper(AddRecipeView);
 
-  // cus the handler have nothing to do with controller
+  // cus the handler have nothing to do with controller abd will also call t from here....
   function AddRecipeView() {
     var _this;
 
@@ -2946,7 +2946,7 @@ var AddRecipeView = /*#__PURE__*/function (_View) {
 
         var dataArr = _toConsumableArray(new FormData(this));
 
-        var data = Object.fromEntries(dataArr); // to turn it to object form
+        var data = Object.fromEntries(dataArr); // to turn array entry to an object form
 
         handler(data);
       });
@@ -18331,7 +18331,8 @@ var controlAddRecipe = /*#__PURE__*/function () {
             _recipeView.default.render(model.state.recipe); // Render bookmark view
 
 
-            _bookmarksView.default.render(model.state.bookmarks); // Change ID
+            _bookmarksView.default.render(model.state.bookmarks); // console.log(model.state.bookmarks);
+            // Change ID
 
 
             window.history.pushState(null, '', "#".concat(model.state.recipe.id)); // Success Message
@@ -18411,7 +18412,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56432" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56949" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
