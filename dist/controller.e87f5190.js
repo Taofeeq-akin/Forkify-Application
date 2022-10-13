@@ -1092,29 +1092,29 @@ var laodRecipe = /*#__PURE__*/function () {
 
           case 3:
             data = _context.sent;
-            // console.log(data);
+            console.log(data);
             state.recipe = createReecipeObject(data); // console.log(state.recipe);
             // To make bookmarked still true after reloap from api by clickong on another recipe
 
             if (state.bookmarks.some(function (bookmark) {
               return bookmark.id === id;
             })) state.recipe.bookmarked = true;else state.recipe.bookmarked = false;
-            _context.next = 12;
+            _context.next = 13;
             break;
 
-          case 8:
-            _context.prev = 8;
+          case 9:
+            _context.prev = 9;
             _context.t0 = _context["catch"](0);
             // Temp error handling
             console.log("".concat(_context.t0, " \uD83D\uDE12\uD83D\uDE12\uD83D\uDE12"));
             throw _context.t0;
 
-          case 12:
+          case 13:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 8]]);
+    }, _callee, null, [[0, 9]]);
   }));
 
   return function laodRecipe(_x) {
@@ -1338,7 +1338,16 @@ var View = /*#__PURE__*/function () {
 
   _createClass(View, [{
     key: "render",
-    value: function render(data) {
+    value: // Use for documentation
+
+    /**
+     * Render the recieved object to the DOM
+     * @param {Object | Object[]} data The data to be render (e.g Recipe)
+     * @param {Boolean} [ render=true] if false, create markup string instead of rendering to DOM
+     * @returns {undefined | string} Markup string will be returned if false
+     * @this {Object} View instance
+     */
+    function render(data) {
       var _render = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
       if (!data || Array.isArray(data) && data.length === 0) return this.renderError();
@@ -2718,11 +2727,11 @@ var PaginationView = /*#__PURE__*/function (_View) {
       var numPages = Math.ceil(this._data.results.length / this._data.resultPerPage);
 
       var generateMarkUpBtnNext = function generateMarkUpBtnNext() {
-        return "\n      <button data-goto=\"".concat(curPage + 1, "\" class=\"btn--inline pagination__btn--next\">\n        <span>Page ").concat(curPage + 1, "</span>\n        <svg class=\"search__icon\">\n            <use href=\"").concat(_icons.default, "#icon-arrow-right\"></use>\n        </svg>\n        </button\n      ");
+        return "\n      <button data-goto=\"".concat(curPage + 1, "\" class=\"btn--inline pagination__btn--next\">\n        <span>Page ").concat(curPage + 1, " of ").concat(numPages, "</span>\n        <svg class=\"search__icon\">\n            <use href=\"").concat(_icons.default, "#icon-arrow-right\"></use>\n        </svg>\n        </button\n      ");
       };
 
       var generateMarkUpBtnPrev = function generateMarkUpBtnPrev() {
-        return "\n        <button data-goto=\"".concat(curPage - 1, "\" class=\"btn--inline pagination__btn--prev\">\n        <svg class=\"search__icon\">\n            <use href=\"").concat(_icons.default, "#icon-arrow-left\"></use>\n        </svg>\n        <span>Page ").concat(curPage - 1, "</span>\n        </button>\n        ");
+        return "\n        <button data-goto=\"".concat(curPage - 1, "\" class=\"btn--inline pagination__btn--prev\">\n        <svg class=\"search__icon\">\n            <use href=\"").concat(_icons.default, "#icon-arrow-left\"></use>\n        </svg>\n        <span>Page ").concat(curPage - 1, " of ").concat(numPages, "</span>\n        </button>\n        ");
       }; // Page 1, and other pages
 
 
@@ -18412,7 +18421,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56949" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54082" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
