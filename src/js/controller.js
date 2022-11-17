@@ -60,7 +60,7 @@ const controlSearchResults = async function () {
     // 4) Render initial pagination button
     paginationView.render(model.state.search);
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 };
 
@@ -120,7 +120,7 @@ const controlAddRecipe = async function (newRecipe) {
       addRecipeView.toggleWindow();
     }, MODAL_CLOSE_SEC * 1000);
   } catch (err) {
-    console.error('😍', err);
+    // console.error('😍', err);
     addRecipeView.renderError(err.message);
   }
 };

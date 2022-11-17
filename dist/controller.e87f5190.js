@@ -1092,29 +1092,27 @@ var laodRecipe = /*#__PURE__*/function () {
 
           case 3:
             data = _context.sent;
-            console.log(data);
+            // console.log(data);
             state.recipe = createReecipeObject(data); // console.log(state.recipe);
             // To make bookmarked still true after reloap from api by clickong on another recipe
 
             if (state.bookmarks.some(function (bookmark) {
               return bookmark.id === id;
             })) state.recipe.bookmarked = true;else state.recipe.bookmarked = false;
-            _context.next = 13;
+            _context.next = 11;
             break;
 
-          case 9:
-            _context.prev = 9;
+          case 8:
+            _context.prev = 8;
             _context.t0 = _context["catch"](0);
-            // Temp error handling
-            console.log("".concat(_context.t0, " \uD83D\uDE12\uD83D\uDE12\uD83D\uDE12"));
             throw _context.t0;
 
-          case 13:
+          case 11:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 9]]);
+    }, _callee, null, [[0, 8]]);
   }));
 
   return function laodRecipe(_x) {
@@ -1155,16 +1153,15 @@ var loadSearchResults = /*#__PURE__*/function () {
 
             state.search.page = 1; // console.log(state.search.results);
 
-            _context2.next = 13;
+            _context2.next = 12;
             break;
 
           case 9:
             _context2.prev = 9;
             _context2.t0 = _context2["catch"](0);
-            console.log("".concat(_context2.t0, " \uD83D\uDE12\uD83D\uDE12\uD83D\uDE12"));
             throw _context2.t0;
 
-          case 13:
+          case 12:
           case "end":
             return _context2.stop();
         }
@@ -1231,8 +1228,7 @@ var init = function init() {
   if (storage) state.bookmarks = JSON.parse(storage); // to turn string into object
 };
 
-init();
-console.log(state.bookmarks);
+init(); // console.log(state.bookmarks);
 
 var clearBookmarks = function clearBookmarks() {
   localStorage.clear('bookmarks');
@@ -18272,15 +18268,14 @@ var controlSearchResults = /*#__PURE__*/function () {
 
             _paginationView.default.render(model.state.search);
 
-            _context2.next = 14;
+            _context2.next = 13;
             break;
 
           case 11:
             _context2.prev = 11;
             _context2.t0 = _context2["catch"](0);
-            console.log(_context2.t0);
 
-          case 14:
+          case 13:
           case "end":
             return _context2.stop();
         }
@@ -18352,17 +18347,17 @@ var controlAddRecipe = /*#__PURE__*/function () {
             setTimeout(function () {
               _addRecipeView.default.toggleWindow();
             }, _config.MODAL_CLOSE_SEC * 1000);
-            _context3.next = 15;
+            _context3.next = 14;
             break;
 
           case 11:
             _context3.prev = 11;
             _context3.t0 = _context3["catch"](0);
-            console.error('😍', _context3.t0);
 
+            // console.error('😍', err);
             _addRecipeView.default.renderError(_context3.t0.message);
 
-          case 15:
+          case 14:
           case "end":
             return _context3.stop();
         }
@@ -18421,7 +18416,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54082" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59759" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
